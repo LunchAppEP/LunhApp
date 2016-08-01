@@ -1,0 +1,70 @@
+@font-face
+{
+    font-family: Lato; /* Имя шрифта */
+
+    src: url('../fonts/Lato-Light.ttf'); /* Путь к файлу со шрифтом */
+}
+
+body {
+    font-family: Lato;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    cursor: pointer;
+    text-transform: none;
+    text-decoration: none;
+    color: #fff;
+}
+
+.da-header {
+    background-color: #f58026;
+    height: 6rem;
+}
+
+.da-header__title {
+    color: #fff;
+    padding: 10px;
+}
+
+.da-page__content {
+    display: flex;
+}
+
+.da-nav {
+    padding: 30px;
+    background-color: #009ca6;
+}
+
+.da-main {
+    width: 100%;
+    text-align: center;
+}
+
+.da-main__title {
+    color: #009ca6;
+    width: 800px;
+    margin: 20px;
+    text-align: center;
+    display: inline-block;
+}
+
+.da-menu-item {
+    display: flex;
+}
+
+.da-menu-item__name {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.da-menu-item__weight {
+    width: 50px;
+}
+
+.da-menu-item__price {
+    width: 50px;
+}

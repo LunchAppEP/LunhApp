@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="deliveryApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <!---Styles---->
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+
+    <!----JS---->
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-ui-router.min.js"></script>
+    <script src="js/services/dishes.js"></script>
+    <script src="js/application.js"></script>
+    <script src="js/appRoutes.js"></script>
+    <!--<script src="js/routes/dishDB.js"></script>-->
+    <script src="js/controllers/menu/menu.js"></script>
+
+</head>
+<body>
+    <div class="da-page">
+        <div class="da-page__header">
+            <header class="da-header">
+                <h1 class="da-header__title">EngagePoint Lunch</h1>
+            </header>
+        </div>
+        <div class="da-page__content">
+            <nav class="da-nav">
+                <a class="da-nav__home" ui-sref="home"><img class="da-nav__img" src="img/logo.svg"></a>
+                <div class="da-nav__navigation">
+                    <ul class="da-navigation">
+                        <li class="da-navigation__item">
+                            <a class="da-navigation-link" ui-sref="menu">
+                                <span class="da-navigation-link__title">Menu</span>
+                            </a>
+                        </li>
+                        <li class="da-navigation__item">
+                            <a class="da-navigation-link" ui-sref="users">
+                                <span class="da-navigation-link__title">Users</span>
+                            </a>
+                        </li>
+                        <li class="da-navigation__item">
+                            <a class="da-navigation-link" ui-sref="orders">
+                                <span class="da-navigation-link__title">Orders</span>
+                            </a>
+                        </li>
+                        <li class="da-navigation__item">
+                            <a class="da-navigation-link" ui-sref="order">
+                                <span class="da-navigation-link__title">Order</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main class="da-main" ui-view>
+            </main>
+            <!--<main class="da-main" ng-controller="DbInfo as db">-->
+
+            <!--</main>-->
+        </div>
+        <div class="da-page__footer">
+            <footer class="da-footer">
+
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

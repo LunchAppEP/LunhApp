@@ -1,0 +1,18 @@
+{
+  "name": "food",
+  "version": "1.0.0",
+  "description": "food",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "angular-ui-router": "^0.3.1",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.4",
+    "mongoose": "^4.5.7",
+    "multer": "^1.1.0"
+  }
+}

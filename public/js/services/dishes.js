@@ -17,3 +17,18 @@ angular.module('deliveryAppService', [])
 // each function returns a promise object    // super simple service
 // each function returns a promise object    // super simple service
 // each function returns a promise object
+// each function returns a promise object    // super simple service
+// each function returns a promise object    // super simple service
+// each function returns a promise object    // super simple service
+// each function returns a promise object    // super simple service
+// each function returns a promise object
+// each function returns a promise object    // super simple service
+// each function returns a promise object    // super simple service
+// each function returns a promise object    // super simple service
+// each function returns a promise object    // super simple service
+// each function returns a promise object
+// each function returns a promise object    // super simple service
+// each function returns a promise object    // super simple service
+// each function returns a promise object    // super simple service
+// each function returns a promise object    // super simple service
+// each function returns a promise object

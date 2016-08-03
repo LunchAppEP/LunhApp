@@ -1,14 +1,10 @@
-/**
- * Created by ievgeniia.krolitska on 8/1/2016.
- */
-// angular.module('deliveryAppService', [])
-//
-//     // super simple service
-//     // each function returns a promise object
-//     .factory('Dishes', function($http) {
-//         return {
-//             get : function() {
-//                 return $http.get('/api/menu');
-//             }
-//         }
-//     });
+angular.module('deliveryAppService', [])
+
+    // super simple service
+    // each function returns a promise object
+    .factory('Menu', function($resource) {
+        var resource = $resource('/api/menu', {}, {
+            'get': {method: 'GET', isArray: true}
+        })
+        return resource;
+    });

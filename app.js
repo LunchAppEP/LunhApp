@@ -1,6 +1,3 @@
-/**
- * Created by ievgeniia.krolitska on 7/22/2016.
- */
 var express = require('express');
 var fs = require('fs');
 var multer  = require('multer');
@@ -13,33 +10,13 @@ var storage = multer.diskStorage({
         cb(null, 'uploads/')
     },
     filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + '.txt')
+        cb(null, file.fieldname + '.txt')
     }
 });
 var upload = multer({ storage: storage });
 
 var app = express();
 app.use(express.static('public'));
-
-// app.use("/api/menu", require("./public/js/routes/dishDb"));
-// require('./routes')(app);
-// app.get('/', function (req, res) {
-//     var options = {
-//         root: __dirname + '/public/',
-//         dotfiles: 'deny',
-//         headers: {
-//             'x-timestamp': Date.now(),
-//             'x-sent': true
-//         }
-//     };
-//     res.sendFile('index.html', options, function (err) {
-//         if (err) {
-//             console.log(err);
-//             res.status(err.status).end();
-//         }
-//
-//     })
-// });
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');
@@ -62,6 +39,7 @@ var dinnerPattern = /[^0-9]+\d{2,3}\s\d{2}\s([^0-9]+\d{2,3}\s{2})+/g;
 var now = new Date();
 
 //Читаем файл
+
 var all = fs.readFileSync('complex.txt','utf8');
 all = all.replace(/\r/g, ' ');
 var allArr = all.split(complexPattern);
@@ -147,11 +125,11 @@ for (var i = 0; i < dinnerArr.length; i++) {
             }
         }
         //Создаем документ для базы данных и сохраняем его
-       var newDinner = Dinner({
-           price: parseInt(dinnerArr[i][j].replace(/[^0-9]*\s\d{2,3}\s/g, '')),
-           dishes: dishes,
-           date: dayDate.getDate() + '/' + (dayDate.getMonth() + 1) + '/' + dayDate.getFullYear()
-       });
+        var newDinner = Dinner({
+            price: parseInt(dinnerArr[i][j].replace(/[^0-9]*\s\d{2,3}\s/g, '')),
+            dishes: dishes,
+            date: dayDate.getDate() + '/' + (dayDate.getMonth() + 1) + '/' + dayDate.getFullYear()
+        });
         newDinner.save(function(err) {
             if (err) throw err;
         });
@@ -188,4 +166,9 @@ app.get('/api/menu', function(req, res) {
     //     console.log(dishes);
     //     res.send(dishes);
     // })
+});
+
+app.post('#/menu', upload.single('menu'), function(req, res) {
+    console.log('Get it');
+    res.send('Done')
 });

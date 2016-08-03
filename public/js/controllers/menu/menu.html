@@ -1,17 +1,20 @@
-<div class="da-main__menu">
-    <ul class="da-menu">
-        <li ng-repeat="dish in dishes" class="da-menu__item">
-            <div class="da-menu-item">
-                <div class="da-menu-item__name">
-                    <span class="da-menu-text">{{dish.name}}</span>
-                </div>
-                <div class="da-menu-item__weight">
-                    <span class="da-menu-text">{{dish.weight}}</span>
-                </div>
-                <div class="da-menu-item__price">
-                    <span class="da-menu-text">{{dish.price}}</span>
-                </div>
-            </div>
-        </li>
-    </ul>
+<div class="da-main__add-menu">
+    <button type="button" class="da-btn_add da-btn" ng-click="vm.show=!vm.show">Add menu</button>
+</div>
+
+<div class="da-main__menu-popup" ng-show="vm.show">
+    <form class="da-menu-popup">
+        <div class="da-menu-popup__close">
+            <button type="button" class="da-btn da-btn_close">X</button>
+        </div>
+        <div class="da-input">
+            <label class="da-input__label">
+                File:
+            </label>
+            <input type="file" name="menu" class="da-input__input">
+        </div>
+        <div class="da-menu-popup__submit">
+            <input type="submit" class="da-input__submit" value="Send">
+        </div>
+    </form>
 </div>

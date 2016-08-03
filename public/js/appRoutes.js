@@ -1,6 +1,3 @@
-/**
- * Created by ievgeniia.krolitska on 8/1/2016.
- */
 angular.module('appRoutes', []).config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/');
@@ -11,8 +8,8 @@ angular.module('appRoutes', []).config(['$stateProvider', '$urlRouterProvider', 
         .state('menu', {
             url: '/menu',
             templateUrl: 'js/controllers/menu/menu.html',
-            controller: 'dbController',
-            controllerAs: 'db'
+            controller: 'addController',
+            controllerAs: 'vm'
         })
         .state('home', {
             url: '/home',
@@ -21,7 +18,7 @@ angular.module('appRoutes', []).config(['$stateProvider', '$urlRouterProvider', 
         })
         .state('users', {
             url: '/users',
-            template: '<p>Users</p>'
+            templateUrl: 'js/controllers/user/user.html'
             // we'll get to this in a bit
         })
         .state('orders', {

@@ -1,7 +1,3 @@
-/**
- * Created by ievgeniia.krolitska on 7/29/2016.
- */
-
 var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
     price: Number,

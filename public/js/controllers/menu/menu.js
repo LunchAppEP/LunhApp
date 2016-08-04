@@ -1,7 +1,30 @@
 angular.module('menuAddController', [])
 
-    .controller('addController', function() {
+    .directive('fileModel', ['$parse', function($parse) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+
+                element.bind('change', function() {
+                    scope.$apply(function() {
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        }
+    }])
+
+    .controller('addController', ['$scope', 'Menu', function($scope, Menu) {
+        debugger;
         var vm = this;
         vm.show = false;
-});
+        vm.uploadFile = function() {
+            var menu = $scope.menu;
+            console.log(menu);
+            var uploadUrl = '/uploads';
+            Menu.post(menu, uploadUrl);
+        }
+}]);
 

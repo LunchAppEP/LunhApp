@@ -1,6 +1,10 @@
+/**
+ * Created by ievgeniia.krolitska on 7/22/2016.
+ */
 var express = require('express');
 var fs = require('fs');
 var multer  = require('multer');
+var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var database = require('./config/database');
 mongoose.connect(database.url);
@@ -17,6 +21,8 @@ var upload = multer({ storage: storage });
 
 var app = express();
 app.use(express.static('public'));
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');
@@ -38,103 +44,116 @@ var dinnerPattern = /[^0-9]+\d{2,3}\s\d{2}\s([^0-9]+\d{2,3}\s{2})+/g;
 //Сохраняем текущую дату
 var now = new Date();
 
-//Читаем файл
 
-var all = fs.readFileSync('complex.txt','utf8');
-all = all.replace(/\r/g, ' ');
-var allArr = all.split(complexPattern);
+
+
+fs.watch('./uploads', {encoding: 'utf8'}, function (eventType, filename) {
+    if (filename) {
+        console.log(filename);
+        var all = fs.readFileSync(('./uploads/menu.txt'),'utf8');
+        all = all.replace(/\r/g, ' ');
+        var allArr = all.split(complexPattern);
+        console.log(all.length);
 //var menu = fs.readFileSync('nocomplex.txt','utf8');
-var menu = allArr[0];
-var dinners = allArr[1];
+        var menu = allArr[0];
+        var dinners = allArr[1];
 
 //Разбиваем строку на массив с меню на каждый день недели
-var menuArr = menu.split(daysPattern);
+        var menuArr = menu.split(daysPattern);
 
 //Первый элемент - пустая строка, потому избавляемся от него
-menuArr.shift();
+        menuArr.shift();
 
 //Определяем типы блюд
-var types = menuArr[0].match(typesPattern);
+        var types = menuArr[0].match(typesPattern);
 
 //Убираем лишние пробелы в строках
-for (var a = 0; a < types.length; a++) {
-    types[a] = types[a].trim();
-}
+        for (var a = 0; a < types.length; a++) {
+            types[a] = types[a].trim();
+        }
 
 //Создаем регулярное выражение для дробления строк меню по типам блюд
-var typesReg = new RegExp(types.join('|'), 'g');
+        var typesReg = new RegExp(types.join('|'), 'g');
 
 //Дробим строки меню на каждый день по типам блюд и избавляемся от первого пустого элемента
-for (var i = 0; i < menuArr.length; i++) {
-    menuArr[i] = menuArr[i].split(typesReg);
-    menuArr[i].shift();
-}
+        for (var i = 0; i < menuArr.length; i++) {
+            menuArr[i] = menuArr[i].split(typesReg);
+            menuArr[i].shift();
+        }
 
 //Перебираем массив блюд и устанавливаем дату каждого дня на следующей неделе
-for (var i = 0; i < menuArr.length; i++) {
-    var dayDate = new Date();
-    dayDate.setDate(now.getDate() + (8 + i - now.getDay())); // устанавливаем день = (текущее число + (7 дней недели + 1 (потому что ищем дни следующей недели) + i (номер дня в следующей неделе) - номер сегоднешнего дня)
+        for (var i = 0; i < menuArr.length; i++) {
+            var dayDate = new Date();
+            dayDate.setDate(now.getDate() + (8 + i - now.getDay())); // устанавливаем день = (текущее число + (7 дней недели + 1 (потому что ищем дни следующей недели) + i (номер дня в следующей неделе) - номер сегоднешнего дня)
 
-    //Убираем лишние пробелы в строках по типу блюд и дробим их на отдельные блюда
-    for (var j = 0; j < menuArr[i].length; j++) {
-        menuArr[i][j] = menuArr[i][j].trim();
-        menuArr[i][j] = menuArr[i][j].match(findDishes);
+            //Убираем лишние пробелы в строках по типу блюд и дробим их на отдельные блюда
+            for (var j = 0; j < menuArr[i].length; j++) {
+                menuArr[i][j] = menuArr[i][j].trim();
+                menuArr[i][j] = menuArr[i][j].match(findDishes);
 
-        //Убираем лишние пробелы в блюдах и сохраняем блюда в базу данных
-        for (var k = 0; k < menuArr[i][j].length; k++) {
-            menuArr[i][j][k] = menuArr[i][j][k].trim();
-            var newDish = Dish({
-                name: menuArr[i][j][k].match(dishNamePattern),
-                price: parseInt(menuArr[i][j][k].replace(dishInfoPattern, '')),
-                weight: parseInt(menuArr[i][j][k].match(weightPattern)),
-                date: dayDate.getDate() + '/' + (dayDate.getMonth() + 1) + '/' + dayDate.getFullYear(),
-                type: types[j]
-            });
-            newDish.save(function(err) {
-                if (err) throw err;
-            });
+                //Убираем лишние пробелы в блюдах и сохраняем блюда в базу данных
+                for (var k = 0; k < menuArr[i][j].length; k++) {
+                    menuArr[i][j][k] = menuArr[i][j][k].trim();
+                    var newDish = Dish({
+                        name: menuArr[i][j][k].match(dishNamePattern),
+                        price: parseInt(menuArr[i][j][k].replace(dishInfoPattern, '')),
+                        weight: parseInt(menuArr[i][j][k].match(weightPattern)),
+                        date: dayDate.getDate() + '/' + (dayDate.getMonth() + 1) + '/' + dayDate.getFullYear(),
+                        type: types[j]
+                    });
+                    newDish.save(function(err) {
+                        if (err) throw err;
+                    });
+                }
+            }
         }
-    }
-}
 
 //Обрабатываем меню комплексных обедов
 
 //Делим меню на дни
-var dinnerArr = dinners.split(daysPattern);
+        var dinnerArr = dinners.split(daysPattern);
 //Выделяем каждый комплексный обед
 
-dinnerArr.shift();
+        dinnerArr.shift();
 
 
 //Перебираем массив обедов на день и сохраняем каждый обед в базу данных
-for (var i = 0; i < dinnerArr.length; i++) {
-    var dayDate = new Date();
-    dayDate.setDate(now.getDate() + (8 + i - now.getDay()));
-    //Разбиваем строку из обедов одного на массив обедов в этот день
-    dinnerArr[i] = dinnerArr[i].match(dinnerPattern);
-    //Перебираем обеды
-    for (var j = 0; j < dinnerArr[i].length; j++) {
-        //Создаем массив блюд (название и вес) для каждого обеда
-        var dishes = dinnerArr[i][j].match(dishInfoPattern);
-        //Перебираем этот массив и создаем массив объектов блюд
-        for (var a = 0; a < dishes.length; a++) {
-            dishes[a] = dishes[a].match();
-            dishes[a] = {
-                dish: dishes[a][0].trim(),
-                weight: dishes[a][1]
+        for (var i = 0; i < dinnerArr.length; i++) {
+            var dayDate = new Date();
+            dayDate.setDate(now.getDate() + (8 + i - now.getDay()));
+            //Разбиваем строку из обедов одного на массив обедов в этот день
+            dinnerArr[i] = dinnerArr[i].match(dinnerPattern);
+            //Перебираем обеды
+            for (var j = 0; j < dinnerArr[i].length; j++) {
+                //Создаем массив блюд (название и вес) для каждого обеда
+                var dishes = dinnerArr[i][j].match(dishInfoPattern);
+                //Перебираем этот массив и создаем массив объектов блюд
+                for (var a = 0; a < dishes.length; a++) {
+                    dishes[a] = dishes[a].match();
+                    dishes[a] = {
+                        dish: dishes[a][0].trim(),
+                        weight: dishes[a][1]
+                    }
+                }
+                //Создаем документ для базы данных и сохраняем его
+                var newDinner = Dinner({
+                    price: parseInt(dinnerArr[i][j].replace(/[^0-9]*\s\d{2,3}\s/g, '')),
+                    dishes: dishes,
+                    date: dayDate.getDate() + '/' + (dayDate.getMonth() + 1) + '/' + dayDate.getFullYear()
+                });
+                newDinner.save(function(err) {
+                    if (err) throw err;
+                });
             }
-        }
-        //Создаем документ для базы данных и сохраняем его
-        var newDinner = Dinner({
-            price: parseInt(dinnerArr[i][j].replace(/[^0-9]*\s\d{2,3}\s/g, '')),
-            dishes: dishes,
-            date: dayDate.getDate() + '/' + (dayDate.getMonth() + 1) + '/' + dayDate.getFullYear()
-        });
-        newDinner.save(function(err) {
-            if (err) throw err;
-        });
+        };
     }
-};
+});
+
+
+//Читаем файл
+
+//
+
 
 app.get('/', function (req, res) {
     var options = {
@@ -168,7 +187,8 @@ app.get('/api/menu', function(req, res) {
     // })
 });
 
-app.post('#/menu', upload.single('menu'), function(req, res) {
-    console.log('Get it');
-    res.send('Done')
+app.post('/uploads', function(req, res) {
+    debugger;
+    console.log(req.params);
+    console.log('End');
 });

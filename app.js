@@ -59,7 +59,7 @@ var now = new Date();
 fs.watch('./uploads', {encoding: 'utf8'}, function (eventType, filename) {
     if (filename) {
         console.log(filename);
-        var all = fs.readFileSync(('./uploads/menu.txt'),'utf8');
+        var all = fs.readFileSync(('./uploads/complex.txt'),'utf8');
         all = all.replace(/\r/g, ' ');
         var allArr = all.split(complexPattern);
         console.log(all.length);

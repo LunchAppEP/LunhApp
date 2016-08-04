@@ -1,3 +1,6 @@
+/**
+ * Created by ievgeniia.krolitska on 7/22/2016.
+ */
 var express = require('express');
 var fs = require('fs');
 var multer  = require('multer');

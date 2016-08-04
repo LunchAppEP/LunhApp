@@ -1,0 +1,18 @@
+<div class="da-main__menu">
+    <h2 class="da-main__title"></h2>
+    <ul class="da-menu">
+        <li ng-repeat="dish in db.dishes" class="da-menu__item">
+            <div class="da-menu-item">
+                <div class="da-menu-item__name">
+                    <span class="da-menu-text">{{dish.name}}</span>
+                </div>
+                <div class="da-menu-item__weight">
+                    <span class="da-menu-text">{{dish.weight}}</span>
+                </div>
+                <div class="da-menu-item__price">
+                    <span class="da-menu-text">{{dish.price}}</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

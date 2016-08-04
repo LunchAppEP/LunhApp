@@ -8,27 +8,3 @@ angular.module('deliveryAppService', [])
         })
         return resource;
     });
-
-
-
-// super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object    // super simple service
-// each function returns a promise object

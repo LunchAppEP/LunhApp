@@ -3,7 +3,13 @@ var fs = require('fs');
 var multer  = require('multer');
 var mongoose = require('mongoose');
 var database = require('./config/database');
-mongoose.connect(database.url);
+var config = require('config');
+
+
+
+mongoose.connect(config.get('mongoose:uri'));
+
+
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -16,10 +22,13 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 var app = express();
+
+app.set('port' , config.get('port'));
+
 app.use(express.static('public'));
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
+app.listen(app.get('port'), function () {
+    console.log('Example app listening on port ' +  config.get('port') );
 });
 
 var Dish = require('./models/dish');

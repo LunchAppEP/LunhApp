@@ -14,7 +14,7 @@ angular.module('addMenuService', [])
             $http({
                     method: 'POST',
                     url: uploadUrl,
-                    data: {fd},
+                    data: fd,
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 })

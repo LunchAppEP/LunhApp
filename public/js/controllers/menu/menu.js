@@ -17,7 +17,6 @@ angular.module('menuAddController', [])
     }])
 
     .controller('addController', ['$scope', 'Menu', function($scope, Menu) {
-        debugger;
         var vm = this;
         vm.show = false;
         vm.uploadFile = function() {

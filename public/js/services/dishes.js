@@ -7,4 +7,4 @@ angular.module('deliveryAppService', [])
             'get': {method: 'GET', isArray: true}
         })
         return resource;
-    });
+    });;

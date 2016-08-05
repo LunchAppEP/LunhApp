@@ -4,7 +4,6 @@
 var express = require('express');
 var fs = require('fs');
 var multer  = require('multer');
-var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var database = require('./config/database');
 var config = require('config');
@@ -30,8 +29,6 @@ var app = express();
 app.set('port' , config.get('port'));
 
 app.use(express.static('public'));
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.listen(app.get('port'), function () {
     console.log('Example app listening on port ' +  config.get('port') );
@@ -53,16 +50,38 @@ var dinnerPattern = /[^0-9]+\d{2,3}\s\d{2}\s([^0-9]+\d{2,3}\s{2})+/g;
 //Сохраняем текущую дату
 var now = new Date();
 
+app.get('/', function (req, res) {
+    var options = {
+        root: __dirname + '/public/',
+        dotfiles: 'deny',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
+    res.sendFile('index.html', options, function (err) {
+        if (err) {
+            console.log(err);
+            res.status(err.status).end();
+        }
 
+    })
+});
 
+app.get('/api/menu', function(req, res) {
+    var promise = Dish.find().exec();
+    promise.then(function(dishes) {
+        res.send(dishes);
+    })
+});
 
-fs.watch('./uploads', {encoding: 'utf8'}, function (eventType, filename) {
-    if (filename) {
-        console.log(filename);
-        var all = fs.readFileSync(('./uploads/complex.txt'),'utf8');
-        all = all.replace(/\r/g, ' ');
-        var allArr = all.split(complexPattern);
-        console.log(all.length);
+app.post('/uploads', upload.single('menu'), function(req, res) {
+
+});
+
+function parseMenu(file) {
+    file = file.replace(/\r/g, ' ');
+    var allArr = file.split(complexPattern);
 //var menu = fs.readFileSync('nocomplex.txt','utf8');
         var menu = allArr[0];
         var dinners = allArr[1];
@@ -156,48 +175,55 @@ fs.watch('./uploads', {encoding: 'utf8'}, function (eventType, filename) {
             }
         };
     }
+
+
+//удаление устаревшиего меню
+
+var dataOldWeekFriday = new Date();
+dataOldWeekFriday.setDate(now.getDate() - 16 ); //находим необхдимую неделю для удаления ( минус 2 недели незед)
+
+while (dataOldWeekFriday.getDay() != 5 ) {
+    dataOldWeekFriday.setDate(dataOldWeekFriday.getDate() + 1); //находим пятницу недели которую неоходимо удалить из БД
+}
+var deletaPeriod = []; //создаем на наполняем массив датами которые хотим удалить из БД
+for (var t = 0; t < 5; t++) {
+    deletaPeriod[t] = dataOldWeekFriday.getDate()- t  + '/' + (dataOldWeekFriday.getMonth() +1)  + '/' + dataOldWeekFriday.getFullYear();
+};
+
+
+app.get('/hello', function (req, res) {
+    Dish.remove({
+            'date': {
+                $in: deletaPeriod
+            }
+        } , function (err , resulr) {
+            if (err) return handleError(err);
+            res.send(resulr);
+        }
+    );
 });
 
+//для выборки и просмотра текущей базы данных , вспомогательная для разработки 
+// app.get('/db', function (req, res) {
+//
+//     var query = Dish.find(  {}, function(err, docs){
+//
+//         if (err) return handleError(err);
+//         res.send(docs);
+//     });
+//
+// });
 
 //Читаем файл
 
-//
-
-
-app.get('/', function (req, res) {
-    var options = {
-        root: __dirname + '/public/',
-        dotfiles: 'deny',
-        headers: {
-            'x-timestamp': Date.now(),
-            'x-sent': true
+fs.watch('./uploads', {encoding: 'utf8'}, function (eventType, filename) {
+    console.log(eventType);
+    if (filename) {
+        console.log(filename);
+        var all = fs.readFileSync(('./uploads/menu.txt'),'utf8');
+        if (all.length > 0) {
+            parseMenu(all);
         }
     };
-    res.sendFile('index.html', options, function (err) {
-        if (err) {
-            console.log(err);
-            res.status(err.status).end();
-        }
+})
 
-    })
-});
-
-app.get('/api/menu', function(req, res) {
-    var promise = Dish.find().exec();
-    promise.then(function(dishes) {
-        res.send(dishes);
-    })
-    // dishes.find(function (err, dishes) {
-    //     if (err) {
-    //         res.send(err)
-    //     }
-    //     console.log(dishes);
-    //     res.send(dishes);
-    // })
-});
-
-app.post('/uploads', function(req, res) {
-    debugger;
-    console.log(req.params);
-    console.log('End');
-});

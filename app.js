@@ -180,29 +180,18 @@ function parseMenu(file) {
 //удаление устаревшиего меню
 
 var dataOldWeekFriday = new Date();
-console.log(dataOldWeekFriday)
-var dayDate = new Date();
-
-dataOldWeekFriday.setDate(now.getDate() - 16 );
-
-console.log(dataOldWeekFriday)
+dataOldWeekFriday.setDate(now.getDate() - 16 ); //находим необхдимую неделю для удаления ( минус 2 недели незед)
 
 while (dataOldWeekFriday.getDay() != 5 ) {
-    dataOldWeekFriday.setDate(dataOldWeekFriday.getDate() + 1);
+    dataOldWeekFriday.setDate(dataOldWeekFriday.getDate() + 1); //находим пятницу недели которую неоходимо удалить из БД
 }
-
-console.log(dataOldWeekFriday + 'friday')
-
-var deletaPeriod = [];
+var deletaPeriod = []; //создаем на наполняем массив датами которые хотим удалить из БД
 for (var t = 0; t < 5; t++) {
     deletaPeriod[t] = dataOldWeekFriday.getDate()- t  + '/' + (dataOldWeekFriday.getMonth() +1)  + '/' + dataOldWeekFriday.getFullYear();
 };
 
-console.log(deletaPeriod);
-var dataFind = 'Eugene';
 
 app.get('/hello', function (req, res) {
-
     Dish.remove({
             'date': {
                 $in: deletaPeriod
@@ -214,21 +203,18 @@ app.get('/hello', function (req, res) {
     );
 });
 
-
-app.get('/db', function (req, res) {
-
-    var query = Dish.find(  {}, function(err, docs){
-
-        if (err) return handleError(err);
-        res.send(docs);
-    });
-
-});
-
-
+//для выборки и просмотра текущей базы данных , вспомогательная для разработки 
+// app.get('/db', function (req, res) {
+//
+//     var query = Dish.find(  {}, function(err, docs){
+//
+//         if (err) return handleError(err);
+//         res.send(docs);
+//     });
+//
+// });
 
 //Читаем файл
-
 
 fs.watch('./uploads', {encoding: 'utf8'}, function (eventType, filename) {
     console.log(eventType);
@@ -241,22 +227,3 @@ fs.watch('./uploads', {encoding: 'utf8'}, function (eventType, filename) {
     };
 })
 
-// app.get('/api/menu', function(req, res) {
-//     var promise = Dish.find().exec();
-//     promise.then(function(dishes) {
-//         res.send(dishes);
-//     })
-//     // dishes.find(function (err, dishes) {
-//     //     if (err) {
-//     //         res.send(err)
-//     //     }
-//     //     console.log(dishes);
-//     //     res.send(dishes);
-//     // })
-// });
-//
-// app.post('/uploads', function(req, res) {
-//     debugger;
-//     console.log(req.params);
-//     console.log('End');
-// });

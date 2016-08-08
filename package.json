@@ -16,8 +16,8 @@
     "mongodb": "^2.2.4",
     "mongoose": "^4.5.7",
     "multer": "^1.1.0",
-    "npm": "^3.10.5",
-    "nconf": "^0.8.4"
+    "nconf": "^0.8.4",
+    "npm": "^3.10.5"
   },
   "dependencies": {
     "nconf": "^0.8.4"

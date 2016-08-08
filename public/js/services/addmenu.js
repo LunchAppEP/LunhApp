@@ -7,10 +7,8 @@ angular.module('addMenuService', [])
             'post': uploadFileToUrl
         }
         function uploadFileToUrl(file, uploadUrl) {
-            console.log(file);
             var fd = new FormData();
             fd.append('menu', file);
-            console.log(fd);
             $http({
                     method: 'POST',
                     url: uploadUrl,
@@ -18,6 +16,9 @@ angular.module('addMenuService', [])
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 })
+           // return $resource(uploadUrl, {fd}, {
+           //      'post': {method: 'POST', transformRequest: angular.identity, headers: {'Content-Type': undefined}}
+           //  })
         }
 
     }]);

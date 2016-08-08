@@ -14,7 +14,7 @@
             <input type="file" name="menu" file-model="menu" class="da-input__input">
         </div>
         <div class="da-menu-popup__submit">
-            <input type="submit" class="da-input__submit" value="Send" ng-click="vm.uploadFile()">
+            <input type="submit" class="da-input__submit" value="Send" ng-click="vm.uploadFile(); vm.show=!vm.show">
         </div>
     </form>
 </div>

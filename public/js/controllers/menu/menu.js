@@ -16,15 +16,14 @@ angular.module('menuAddController', [])
         }
     }])
 
-    .controller('addController', ['$scope', 'Menu', function($scope, Menu) {
+    .controller('addController', ['$scope', 'MenuService', function($scope, MenuService) {
         var vm = this;
         vm.show = false;
         vm.uploadFile = function() {
-            var menu = $scope.menu;
-            Menu.send(menu).$promise.then(
+            var menuFile = $scope.menuFileUpload;
+            MenuService.send(menuFile).$promise.then(
                 function(data) {
-                    vm.menu = data.menu;
-                    console.log(vm.menu);
+                    vm.menu = data.menuArray;
                 },
                 function(data) {
                 });

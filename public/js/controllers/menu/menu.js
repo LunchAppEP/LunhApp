@@ -21,9 +21,16 @@ angular.module('menuAddController', [])
         vm.show = false;
         vm.uploadFile = function() {
             var menu = $scope.menu;
-            var uploadUrl = '/uploads';
-            vm.menu = Menu.send(menu, uploadUrl);
-            console.log(vm.menu);
+            Menu.send(menu).$promise.then(
+                function(data) {
+                    vm.menu = data.menu;
+                    console.log(vm.menu);
+                },
+                function(data) {
+                });
         }
+        $scope.$watch('vm.menu', function(newVal, oldVal) {
+            console.log('watch fired, new value: ' + newVal);
+        })
 }]);
 

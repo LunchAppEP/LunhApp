@@ -62,15 +62,3 @@ app.get('/hello', function (req, res) {
 // });
 
 
-function watchFiles() {
-    fs.watch('./uploads', {encoding: 'utf8'}, function (eventType, filename) {
-        if (filename) {
-            var all = fs.readFileSync(('./uploads/menu.txt'),'utf8');
-            if (all.length > 0) {
-                var menu = parseMenu.createMenu(all);
-                return menu;
-            }
-        };
-    })
-};
-

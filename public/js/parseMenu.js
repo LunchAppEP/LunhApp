@@ -21,32 +21,30 @@ module.exports = {
            this.type = type;
            this.date = date;
            this.modelType = modelType;
-           var self = this;
-           this.toModel = function(model) {
-               return new model({
-                   name: self.name,
-                   price: self.price,
-                   weight: self.weight,
-                   type: self.type,
-                   date: self.date
-               });
-           }
+       }
+       Dish.prototype.toModel = function(model) {
+           return new model({
+               name: this.name,
+               price: this.price,
+               weight: this.weight,
+               type: this.type,
+               date: this.date
+           });
        };
+
        function Dinner(price, date, modelType, dishes) {
            this.price = price;
            this.date = date;
            this.modelType = modelType;
            this.dishes = dishes;
-           var self = this;
-           this.toModel = function(model) {
-               return new model({
-                   price: self.price,
-                   dishes: self.dishes,
-                   date: self.date
-               });
-           }
        }
-
+        Dinner.prototype.toModel = function(model) {
+            return new model({
+                price: this.price,
+                dishes: this.dishes,
+                date: this.date
+            });
+        };
 
         file = file.replace(/\r/g, ' ');
         var allArr = file.split(complexPattern);
@@ -141,6 +139,13 @@ module.exports = {
                 if (err) throw err;
             });
         });
+    },
+
+    readFile: function() {
+        var fs = require('fs');
+        var all = fs.readFileSync(('./uploads/menu.txt'),'utf8');
+        var menu = this.createMenu(all);
+        return menu;
     }
 
 }

@@ -4,6 +4,7 @@ var dishes = require(__base + 'controllers/dish'),
     orders = require(__base + 'controllers/order'),
     users = require(__base + 'controllers/user'),
     multer  = require('multer'),
+    parseMenu = require(__base + 'public/js/parseMenu.js');
     storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, 'uploads/')
@@ -34,7 +35,8 @@ module.exports = function (app) {
     });
 
     app.post('/uploads', upload.single('menu'), function(req, res) {
-        res.sendStatus(202);
+        var menu ={menu: parseMenu.readFile()};
+        res.send(menu);
     });
 
 

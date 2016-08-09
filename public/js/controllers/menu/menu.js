@@ -21,9 +21,9 @@ angular.module('menuAddController', [])
         vm.show = false;
         vm.uploadFile = function() {
             var menu = $scope.menu;
-            console.log(menu);
             var uploadUrl = '/uploads';
-            Menu.post(menu, uploadUrl);
+            vm.menu = Menu.send(menu, uploadUrl);
+            console.log(vm.menu);
         }
 }]);
 

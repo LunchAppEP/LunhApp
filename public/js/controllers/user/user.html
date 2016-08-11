@@ -10,6 +10,7 @@
             <ul class="da-users-list">
                 <li class="da-users-list__item" ng-repeat="user in vm.users">
                     <span class="da-users-list__name">{{user.lName}} {{user.fName}}</span>
+                    <span class="da-users-list__balance">{{user.email}}</span>
                     <span class="da-users-list__balance">{{user.balance}}</span>
                 </li>
             </ul>
@@ -24,7 +25,7 @@
                 <label class="da-input__label">
                     User email
                 </label>
-                <input type="text" name="user-email" class="da-input__input">
+                <input type="text" name="user-email" class="da-input__input" ng-model="vm.user.email">
             </div>
         </div>
         <div class="da-add-user__input">
@@ -32,7 +33,7 @@
                 <label class="da-input__label">
                     User first name
                 </label>
-                <input type="text" name="user-email" class="da-input__input">
+                <input type="text" name="user-fName" class="da-input__input" ng-model="vm.user.fName">
             </div>
         </div>
         <div class="da-add-user__input">
@@ -40,12 +41,12 @@
                 <label class="da-input__label">
                     User last name
                 </label>
-                <input type="text" name="user-email" class="da-input__input">
+                <input type="text" name="user-lName" class="da-input__input" ng-model="vm.user.lName">
             </div>
         </div>
         <div class="da-add-user__submit">
             <div class="da-input">
-                <input type="submit" class="da-input__submit" value='Submit'>
+                <input type="submit" class="da-input__submit" value='Submit' ng-click="vm.createUser(); vm.showPopup=!vm.showPopup">
             </div>
         </div>
     </form>

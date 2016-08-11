@@ -20,20 +20,27 @@
 </div>
 
 <div class="da-main__menu">
-    <h2 class="da-main__title"></h2>
-    <ul class="da-menu">
-        <li ng-repeat="dish in vm.menu" class="da-menu__item">
-            <div class="da-menu-item">
-                <div class="da-menu-item__name">
-                    <span class="da-menu-text">{{dish.name}}</span>
-                </div>
-                <div class="da-menu-item__weight">
-                    <span class="da-menu-text">{{dish.weight}}</span>
-                </div>
-                <div class="da-menu-item__price">
-                    <span class="da-menu-text">{{dish.price}}</span>
-                </div>
+    <div class="da-day" ng-repeat="day in vm.menu.days">
+        <h2 class="da-main__title">{{day}}</h2>
+        <div class="da-day__dishes" ng-repeat="type in vm.menu.types">
+            <h3 class="da-day__title">{{type}}</h3>
+            <div class="da-row" ng-repeat="dish in vm.menu.menu | filter: {date: day, type: type}">
+                <div class="da-row__cell da-row__cell_flex-grow"><span class="da-menu-text">{{dish.name[0]}}</span></div>
+                <div class="da-row__cell da-row__cell_width"><span class="da-menu-text">{{dish.weight}} г</span></div>
+                <div class="da-row__cell da-row__cell_width"><span class="da-menu-text">{{dish.price}} грн</span></div>
             </div>
-        </li>
-    </ul>
+        </div>
+        <div class="da-day__dinners">
+            <h3 class="da-day__title">Комплексные обеды</h3>
+            <div class="da-row" ng-repeat="dinner in vm.menu.menu | filter: {date: day, modelType: 'Dinner'}">
+                <div class="da-row__cell  da-row__cell_flex-grow da-row__cell_column">
+                    <div class="da-row" ng-repeat="dish in dinner.dishes">
+                        <div class="da-row__cell da-row__cell_flex-grow"><span class="da-menu-text">{{dish.dish}}</span></div>
+                        <div class="da-row__cell da-row__cell_width"><span class="da-menu-text">{{dish.weight}} г</span></div>
+                    </div>
+                </div>
+                <div class="da-row__cell da-row__cell_width"><span class="da-menu-text">{{dinner.price}} грн</span></div>
+            </div>
+        </div>
+    </div>
 </div>

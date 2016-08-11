@@ -15,6 +15,7 @@ exports.getById = function(req, res) {
 };
 
 exports.post = function(req, res) {
+    debugger;
     var user = new User ({
         email: req.body.email,
         fName: req.body.fName,

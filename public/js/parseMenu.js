@@ -13,6 +13,7 @@ module.exports = {
         var dinnerPattern = /[^0-9]+\d{2,3}\s\d{2}\s([^0-9]+\d{2,3}\s{2})+/g;
         var now = new Date();
        var menu = [];
+       var days = [];
        
        function Dish(name, price, weight, type, date, modelType) {
            this.name = name;
@@ -48,7 +49,6 @@ module.exports = {
 
         file = file.replace(/\r/g, ' ');
         var allArr = file.split(complexPattern);
-        //var menu = fs.readFileSync('nocomplex.txt','utf8');
         var dishes = allArr[0];
         var dinners = allArr[1];
 
@@ -79,7 +79,7 @@ module.exports = {
         for (var i = 0; i < dishArr.length; i++) {
             var dayDate = new Date();
             dayDate.setDate(now.getDate() + (8 + i - now.getDay())); // устанавливаем день = (текущее число + (7 дней недели + 1 (потому что ищем дни следующей недели) + i (номер дня в следующей неделе) - номер сегоднешнего дня)
-
+            days.push(dayDate.getDate() + '/' + (dayDate.getMonth() + 1) + '/' + dayDate.getFullYear());
             //Убираем лишние пробелы в строках по типу блюд и дробим их на отдельные блюда
             for (var j = 0; j < dishArr[i].length; j++) {
                 dishArr[i][j] = dishArr[i][j].trim();
@@ -127,7 +127,7 @@ module.exports = {
                 menu.push(newDinner);
             }
         }
-       return menu;
+       return {menu: menu, types: types, daysDates: days};
     },
 
     saveMenu: function(menu) {
@@ -143,9 +143,9 @@ module.exports = {
 
     readFile: function() {
         var fs = require('fs');
-        var all = fs.readFileSync(('./uploads/menu.txt'),'utf8');
-        var menu = this.createMenu(all);
-        return menu;
+        var all = fs.readFileSync(('./uploads/menuFile.txt'),'utf8');
+        var menuObj = this.createMenu(all);
+        return menuObj;
     }
 
 }

@@ -1,7 +1,13 @@
 angular.module('userActionController', [])
-    .controller('userActionCtrl', function($scope, $http) {
+    .controller('userController', ['$scope', 'userService', function($scope, userService) {
         var vm = this;
         vm.showPopup = false;
-        vm.users = User.get();
+        vm.user = {};
+        vm.users = userService.get();
+        vm.createUser = function() {
+            userService.save(vm.user);
+            vm.users = userService.get();
+        }
 
-    });
+        $scope.$watch('vm.users', function(oldVal, newVal){});
+    }]);

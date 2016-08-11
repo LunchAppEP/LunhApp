@@ -19,17 +19,15 @@ angular.module('menuAddController', [])
     .controller('addController', ['$scope', 'MenuService', function($scope, MenuService) {
         var vm = this;
         vm.show = false;
+        vm.days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница'];
         vm.uploadFile = function() {
             var menuFile = $scope.menuFileUpload;
             MenuService.send(menuFile).$promise.then(
                 function(data) {
-                    vm.menu = data.menuArray;
+                    vm.menu = {menu: data.menu, types: data.types, days: data.daysDates};
                 },
-                function(data) {
-                });
-        }
-        $scope.$watch('vm.menu', function(newVal, oldVal) {
-            console.log('watch fired, new value: ' + newVal);
-        })
+                function(data) {});
+        };
+        $scope.$watch('vm.menu', function(newVal, oldVal) {});
 }]);
 

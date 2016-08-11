@@ -1,1 +1,1 @@
-angular.module('deliveryApp', ['ui.router', 'appRoutes', 'ngResource', 'menuController', 'menuAddController', 'deliveryAppService', 'addMenuService']);
+angular.module('deliveryApp', ['ui.router', 'appRoutes', 'ngResource', 'menuAddController', 'userActionController', 'addMenuService', 'userServiceModule']);

@@ -36,7 +36,7 @@ module.exports = function (app) {
     });
 
     app.post('/uploads', upload.single('menuFile'), function(req, res) {
-        res.send({menuArray: parseMenu.readFile()});
+        res.send(parseMenu.readFile());
     });
 
 

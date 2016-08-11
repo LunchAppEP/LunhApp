@@ -9,10 +9,18 @@
 
 @font-face
 {
-    font-family: Lato; /* Имя шрифта */
+    font-family: Lato-light; /* Имя шрифта */
 
     src: url('../fonts/Lato-Light.ttf'); /* Путь к файлу со шрифтом */
 }
+
+@font-face
+{
+    font-family: Lato; /* Имя шрифта */
+
+    src: url('../fonts/Lato-Medium.ttf'); /* Путь к файлу со шрифтом */
+}
+
 
 body {
     font-family: Lato;
@@ -26,22 +34,30 @@ a {
     cursor: pointer;
     text-transform: none;
     text-decoration: none;
-    color: #fff;
 }
 
 button {
     border: none;
-    background-color: none;
+    background-color: transparent;
 }
 
 .da-header {
-    background-color: #f58026;
-    height: 6rem;
+    background-color: #c4c4c4;
+    height: 8vh;
 }
 
 .da-header__title {
-    color: #fff;
-    padding: 10px;
+    padding: 20px 0 20px 20px;
+    height: 8vh;
+}
+
+.da-nav__home {
+    display: block;
+    height: 100%;
+}
+
+.da-nav__img {
+    height: 100%;
 }
 
 .da-page__content {
@@ -49,13 +65,27 @@ button {
 }
 
 .da-nav {
-    padding: 30px;
-    background-color: #009ca6;
+    padding: 30px 20px;
+    background-color: #ececec;
+    min-height: 92vh;
+    width: 10vw;
+}
+
+.da-navigation__item {
+    text-align: left;
+}
+
+.da-navigation-link {
+    color: #009ca6;
+    font-weight: 500;
+}
+
+.da-navigation-link__title {
+    padding-left: 5px;
 }
 
 .da-main {
     width: 100%;
-    text-align: center;
     position: relative;
 }
 
@@ -77,31 +107,47 @@ button {
     display: inline-block;
 }
 
-.da-menu-item {
-    display: flex;
-}
-
-.da-menu-item__name {
-    flex-grow: 1;
-    text-align: left;
-}
-
-.da-menu-item__weight {
-    width: 50px;
-}
-
-.da-menu-item__price {
-    width: 50px;
-}
-
 .da-btn_add {
     background-color: #009ca6;
     color: #fff;
     padding: 10px;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 10px;
+    right: 10%;
     box-shadow: 0 0 10px 1px rgba(0,156,166,0.8);
-    transform: translate(-50%, -50%);
+}
+
+.da-main__menu {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.da-day__title {
+    padding-top: 20px;
+}
+
+.da-row {
+    display: flex;
+    border: 1px solid #555559;
+}
+
+.da-row__cell {
+    border: 1px solid #555559;
+    padding: 5px 0;
+}
+
+.da-row__cell_column {
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.da-row__cell_flex-grow {
+    flex-grow: 1;
+}
+
+.da-row__cell_width {
+    width: 70px;
+    text-align: center;
 }
 

@@ -1,10 +1,12 @@
-angular.module('userService', [])
+angular.module('userServiceModule', [])
 
     // super simple service
     // each function returns a promise object
-    .factory('User', function($resource) {
+    .factory('userService', function($resource) {
         return $resource('/api/users', {}, {
             'get': {method: 'GET', isArray: true},
-            'post':
+            'save': {
+                method: 'POST'
+            }
         });
     });

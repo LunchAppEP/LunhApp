@@ -4,7 +4,7 @@ var multer  = require('multer');
 var mongoose = require('mongoose');
 var config = require('./config/index.js');
 var parseMenu = require('./public/js/parseMenu.js');
-
+var bodyParser = require('body-parser');
 
 
 mongoose.connect(config.get('mongoose:uri'));
@@ -19,7 +19,8 @@ var app = express();
 app.set('port' , config.get('port'));
 
 app.use(express.static('public'));
-
+app.use(bodyParser.json());
+app.use(bodyParser.text());
 app.listen(app.get('port'), function () {
     console.log('Example app listening on port ' +  config.get('port') );
     nextWeek.createNextWeek();

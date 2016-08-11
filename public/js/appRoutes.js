@@ -14,22 +14,20 @@ angular.module('appRoutes', []).config(['$stateProvider', '$urlRouterProvider', 
         .state('home', {
             url: '/home',
             template: '<h2 class="da-main__title">Ievgen Lupashko, Ievgeniia Krolitska, Olena Zhyvodorova and Olena Tregub welcome You to order Lunches</h2>'
-            // we'll get to this in a bit
         })
         .state('users', {
             url: '/users',
-            templateUrl: 'js/controllers/user/user.html'
-            // we'll get to this in a bit
+            templateUrl: 'js/controllers/user/user.html',
+            controller: 'userController',
+            controllerAs: 'vm'
         })
         .state('orders', {
             url: '/orders',
             template: '<p>Orders</p>'
-            // we'll get to this in a bit
         })
         .state('order', {
             url: '/order',
             template: '<p>Order</p>'
-            // we'll get to this in a bit
         });
 
 }])

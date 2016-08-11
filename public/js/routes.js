@@ -46,4 +46,5 @@ module.exports = function (app) {
     app.get('/api/orders', orders.get);
     app.get('/api/users', users.get);
     app.post('/api/users', users.post);
+    app.put('/api/users', users.changeBalance);
 }

@@ -16,10 +16,12 @@ exports.getById = function(req, res) {
 
 exports.post = function(req, res) {
     debugger;
+    var email = req.body.email;
+    var info = email.split('.');
     var user = new User ({
-        email: req.body.email,
-        fName: req.body.fName,
-        lName: req.body.lName,
+        email: email + '@engagepoint.com',
+        fName: info[0],
+        lName: info[1],
         balance: 0,
         password: "",
         type: "user"
@@ -31,7 +33,7 @@ exports.post = function(req, res) {
 };
 
 exports.changeBalance = function(req, res) {
-    User.findById(req.params.id, function(err, user) {
+    User.findById(req.body.id, function(err, user) {
         if (err) return res.status(400).send(err.message);
 
         user.balance = req.body.balance;

@@ -7,6 +7,9 @@ angular.module('userServiceModule', [])
             'get': {method: 'GET', isArray: true},
             'save': {
                 method: 'POST'
+            },
+            'changeBalance': {
+                method: 'PUT'
             }
         });
     });

@@ -5,7 +5,7 @@ var dishes = require(__base + 'controllers/dish'),
     users = require(__base + 'controllers/user'),
     weeks = require(__base + 'controllers/week'),
     multer  = require('multer'),
-    parseMenu = require(__base + 'public/js/parseMenu.js');
+    parseMenu = require(__base + 'public/js/parseMenu.js'),
     storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, 'uploads/')
@@ -47,4 +47,6 @@ module.exports = function (app) {
     app.get('/api/orders', orders.get);
     app.get('/api/users', users.get);
     app.get('/api/weeks', weeks.get);
+    app.post('/api/users', users.post);
+    app.put('/api/users', users.changeBalance);
 }

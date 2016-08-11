@@ -9,13 +9,21 @@
         <div class="da-users__list">
             <ul class="da-users-list">
                 <li class="da-users-list__item" ng-repeat="user in vm.users">
-                    <span class="da-users-list__name">{{user.lName}} {{user.fName}}</span>
+                    <span class="da-users-list__name">{{user.lName | capitalize}} {{user.fName | capitalize}}</span>
                     <span class="da-users-list__balance">{{user.email}}</span>
                     <span class="da-users-list__balance">{{user.balance}}</span>
+                    <div class="da-users-list__changeBal">
+                        <button type="button" class="da-users-list__add" ng-click="vm.addBal=!vm.addBal;vm.userBalance.id=user._id;vm.userBalance.old=user.balance">+</button>
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
+</div>
+
+<div class="da-balance-popup" ng-show="vm.addBal">
+    <input type="number" class="da-balance-popup__num" name="newBalance" ng-model="vm.userBalance.balance">
+    <button type="submit" class="da-balance-popup__submit" ng-click="vm.addMoney();vm.addBal=!vm.addBal"><i class="fa fa-money" aria-hidden="true"></i></button>
 </div>
 
 <div class="da-add-user-popup" ng-show="vm.showPopup">
@@ -25,23 +33,7 @@
                 <label class="da-input__label">
                     User email
                 </label>
-                <input type="text" name="user-email" class="da-input__input" ng-model="vm.user.email">
-            </div>
-        </div>
-        <div class="da-add-user__input">
-            <div class="da-input">
-                <label class="da-input__label">
-                    User first name
-                </label>
-                <input type="text" name="user-fName" class="da-input__input" ng-model="vm.user.fName">
-            </div>
-        </div>
-        <div class="da-add-user__input">
-            <div class="da-input">
-                <label class="da-input__label">
-                    User last name
-                </label>
-                <input type="text" name="user-lName" class="da-input__input" ng-model="vm.user.lName">
+                <input type="text" name="user-email" class="da-input__input" ng-model="vm.user.email"><span class="da-input__addition">@engagepoint.com</span>
             </div>
         </div>
         <div class="da-add-user__submit">

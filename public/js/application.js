@@ -1,1 +1,18 @@
-angular.module('deliveryApp', ['ui.router', 'appRoutes', 'ngResource', 'Filters', 'menuAddController', 'userActionController', 'addMenuService', 'userServiceModule']);
+angular.module('deliveryApp', [
+    'ui.router',
+    'appRoutes',
+    'ngResource',
+    'Filters',
+    'newUserModule',
+    'renderMenuModule',
+    'navMenuModule',
+    'menuAddController',
+    'contentMenuModule',
+    'userActionController',
+    'newMenuModule',
+    'addMenuService',
+    'deliveryAppService',
+    'allWeeksService',
+    'userServiceModule',
+    'createStateService',
+    'getMenuMediatorService']);

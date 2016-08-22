@@ -7,16 +7,7 @@
     <div class="da-users">
         <h2 class="da-users__title">Users list</h2>
         <div class="da-users__list">
-            <ul class="da-users-list">
-                <li class="da-users-list__item" ng-repeat="user in vm.users">
-                    <span class="da-users-list__name">{{user.lName | capitalize}} {{user.fName | capitalize}}</span>
-                    <span class="da-users-list__balance">{{user.email}}</span>
-                    <span class="da-users-list__balance">{{user.balance}}</span>
-                    <div class="da-users-list__changeBal">
-                        <button type="button" class="da-users-list__add" ng-click="vm.addBal=!vm.addBal;vm.userBalance.id=user._id;vm.userBalance.old=user.balance">+</button>
-                    </div>
-                </li>
-            </ul>
+            <new-user users="vm.users"></new-user>
         </div>
     </div>
 </div>

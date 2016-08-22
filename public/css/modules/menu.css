@@ -1,0 +1,157 @@
+@component content-nav {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 0 3rem 3.5rem;
+    border-bottom: 1px solid #f1eee5;
+    
+    @descendent btns {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 0 3rem;
+    } 
+
+    @descendent title {
+        text-align: center;
+    }
+}
+
+@component nav-btns {
+    display: flex;
+
+    @descendent btn {
+        @modifier prev {
+            margin-right: auto;
+        }
+        @modifier next {
+            margin-left: auto;
+        }
+    }
+}
+
+@component content-header {
+    color: #2f3138;
+    font-size: 2.4rem;
+    font-weight: 400;
+    padding-bottom: 0.3rem;
+    text-transform: uppercase;
+}
+
+@component text {
+    font-size: 1.2rem;
+
+    @modifier color_accent {
+        color: #ef643f;
+        font-weight: 600;
+    }
+}
+
+@component content {
+    text-align: center;
+    flex-grow: 1;
+    position: relative;
+
+    @modifier bg {
+        background-color: #f1eee5;
+    }
+
+    @descendent add-menu {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        @modifier action {
+            top: -8rem;
+            right: 3rem;
+            transform: translate(0, 0);
+        }
+    }
+
+    @descendent menu {
+        background-color: #ffffff;
+    }
+    
+
+}
+
+@component file-upload {
+    cursor: pointer;
+
+    @descendent label {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    @descendent input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    @descendent text {
+        color: #69696b;
+        font-size: 1.6rem;
+        display: block;
+        padding-bottom: 1.5rem;
+    }
+}
+
+@component day-menu {
+    height: 70vh;
+    overflow: auto;
+
+    @descendent category {
+        padding: 0 3rem;
+        text-align: left;
+    }
+}
+
+@component menu-category {
+    @descendent title {
+        color: #2f3138;
+        font-size: 1.6rem;
+        padding: 6rem 0 2rem 0;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+}
+
+@component menu-text {
+    font-size: 1.6rem;
+    color: #2f3138;
+    font-weight: 300;
+
+    @modifier mute {
+        color: #b5beb5;
+    }
+
+    @modifier bg {
+        padding-right: 1rem;
+        background-color: #fff;
+    }
+
+    @modifier cell {
+        max-width: 80%;
+    }
+
+    @modifier index {
+        padding-right: .5rem;
+    }
+}
+
+@component action-btns {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    @descendent item {
+        margin-left: 1.5rem;
+    }
+}

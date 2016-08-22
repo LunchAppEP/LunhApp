@@ -41,14 +41,29 @@ button {
     background-color: transparent;
 }
 
+.da-page__header {
+    margin-left: 10vw;
+}
+
+.da-page__content {
+    margin-left: 10vw;
+}
+
 .da-header {
-    background-color: #c4c4c4;
     height: 8vh;
 }
 
 .da-header__title {
     padding: 20px 0 20px 20px;
     height: 8vh;
+}
+
+.da-page__nav {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    z-index: 2;
+    background-color: #ececec;
 }
 
 .da-nav__home {
@@ -66,8 +81,8 @@ button {
 
 .da-nav {
     padding: 30px 20px;
-    background-color: #ececec;
-    min-height: 92vh;
+
+
     width: 10vw;
 }
 
@@ -76,7 +91,7 @@ button {
 }
 
 .da-navigation-link {
-    color: #009ca6;
+    color: #fff;
     font-weight: 500;
 }
 

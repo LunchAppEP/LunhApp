@@ -12,6 +12,9 @@ angular.module('addMenuService', [])
                     return fd;
                 },
                 headers: {'Content-Type': undefined}
+            },
+            'save': {
+                method: 'PUT'
             }
         });
         

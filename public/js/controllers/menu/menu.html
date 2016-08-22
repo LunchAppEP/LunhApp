@@ -1,46 +1,5 @@
-<div class="da-main__add-menu">
-    <button type="button" class="da-btn_add da-btn" ng-click="vm.show=!vm.show">Add menu</button>
+<div class="da-main__content">
+    <nav-menu></nav-menu>
+    <content-menu menu="vm.menu" activeWeek="vm.activeWeek"></content-menu>
 </div>
 
-<div class="da-main__menu-popup" ng-show="vm.show">
-    <form class="da-menu-popup">
-        <div class="da-menu-popup__close">
-            <button type="button" class="da-btn da-btn_close" ng-click="vm.show=!vm.show">X</button>
-        </div>
-        <div class="da-input">
-            <label class="da-input__label">
-                File:
-            </label>
-            <input type="file" name="menu" file-model="menuFileUpload" class="da-input__input">
-        </div>
-        <div class="da-menu-popup__submit">
-            <input type="submit" class="da-input__submit" value="Send" ng-click="vm.uploadFile(); vm.show=!vm.show">
-        </div>
-    </form>
-</div>
-
-<div class="da-main__menu">
-    <div class="da-day" ng-repeat="day in vm.menu.days">
-        <h2 class="da-main__title">{{day}}</h2>
-        <div class="da-day__dishes" ng-repeat="type in vm.menu.types">
-            <h3 class="da-day__title">{{type}}</h3>
-            <div class="da-row" ng-repeat="dish in vm.menu.menu | filter: {date: day, type: type}">
-                <div class="da-row__cell da-row__cell_flex-grow"><span class="da-menu-text">{{dish.name[0]}}</span></div>
-                <div class="da-row__cell da-row__cell_width"><span class="da-menu-text">{{dish.weight}} г</span></div>
-                <div class="da-row__cell da-row__cell_width"><span class="da-menu-text">{{dish.price}} грн</span></div>
-            </div>
-        </div>
-        <div class="da-day__dinners">
-            <h3 class="da-day__title">Комплексные обеды</h3>
-            <div class="da-row" ng-repeat="dinner in vm.menu.menu | filter: {date: day, modelType: 'Dinner'}">
-                <div class="da-row__cell  da-row__cell_flex-grow da-row__cell_column">
-                    <div class="da-row" ng-repeat="dish in dinner.dishes">
-                        <div class="da-row__cell da-row__cell_flex-grow"><span class="da-menu-text">{{dish.dish}}</span></div>
-                        <div class="da-row__cell da-row__cell_width"><span class="da-menu-text">{{dish.weight}} г</span></div>
-                    </div>
-                </div>
-                <div class="da-row__cell da-row__cell_width"><span class="da-menu-text">{{dinner.price}} грн</span></div>
-            </div>
-        </div>
-    </div>
-</div>

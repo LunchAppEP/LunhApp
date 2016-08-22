@@ -24,10 +24,6 @@ angular.module('appRoutes', []).config(['$stateProvider', '$urlRouterProvider', 
         .state('orders', {
             url: '/orders',
             template: '<p>Orders</p>'
-        })
-        .state('order', {
-            url: '/order',
-            template: '<p>Order</p>'
         });
 
 }])

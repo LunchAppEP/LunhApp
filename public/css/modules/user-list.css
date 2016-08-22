@@ -1,0 +1,19 @@
+@component table-list {
+    @descendent row {
+        display: flex;
+        width: 80%;
+        margin: 0 auto;
+        border: 1px solid #000;
+
+        &:hover {
+            background-color: rgba(0, 240, 255, 0.12);
+        }
+    }
+    @descendent cell {
+        width: 15%;
+
+        @modifier double {
+            width: 40%;
+        }
+    }
+}

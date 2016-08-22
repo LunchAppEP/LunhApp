@@ -1,0 +1,19 @@
+<ul class="da-table-list">
+    <li class="da-table-list__row" ng-repeat="user in users">
+        <div class="da-table-list__cell">
+            <span class="da-users-list__fName">{{user.lName | capitalize}}</span>
+        </div>
+        <div class="da-table-list__cell">
+            <span class="da-users-list__lName">{{user.fName | capitalize}}</span>
+        </div>
+        <div class="da-table-list__cell da-table-list__cell_double">
+            <span class="da-users-list__email">{{user.email}}</span>
+        </div>
+        <div class="da-table-list__cell">
+            <span class="da-users-list__balance">{{user.balance}}</span>
+        </div>
+        <div class="da-table-list__cell">
+            <button type="button" class="da-users-list__add" ng-click="changeBalance(user)">+</button>
+        </div>
+    </li>
+</ul>

@@ -1,0 +1,24 @@
+<div class="da-content__new-menu">
+    <div class="da-content__add-menu" ng-class="{'da-content__add-menu_action': vm.hasNewMenu}">
+        <div class="da-action-btns">
+            <div class="da-action-btns__item">
+                <div class="da-file-upload">
+                    <label for="menuFile" class="da-file-upload__label">
+                        <span ng-hide="vm.hasNewMenu" class="da-file-upload__text"> Please, add new menu for next week!</span>
+                        <input id="menuFile" type="file" file-model="menuFileUpload" ng-model="menuFileUpload" class="da-file-upload__input">
+                        <button ng-hide="vm.hasNewMenu" type="button" class="da-btn da-btn_primary">Add New Menu</button>
+                        <button ng-show="vm.hasNewMenu" type="button" class="da-btn da-btn_mute">Choose Another File</button>
+                    </label>
+                </div>
+            </div>
+            <div class="da-action-btns__item">
+                <div ng-show="vm.hasNewMenu" class="da-action-btns__item">
+                    <div class="da-save-file">
+                        <button type="button" class="da-btn da-btn_primary" ng-click="vm.saveMenu()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <render-menu ng-if="vm.hasNewMenu" menu="vm.menu.menu" types = vm.menu.types></render-menu>
+</div>

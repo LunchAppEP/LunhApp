@@ -1,0 +1,305 @@
+*,
+*:after,
+*:before
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+@font-face
+{
+    font-family: Lato-light; /* Имя шрифта */
+
+    src: url('../fonts/Lato-Light.ttf'); /* Путь к файлу со шрифтом */
+}
+
+@font-face
+{
+    font-family: Lato; /* Имя шрифта */
+
+    src: url('../fonts/Lato-Medium.ttf'); /* Путь к файлу со шрифтом */
+}
+
+
+body {
+    font-family: Lato;
+    max-height: 100vh;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    cursor: pointer;
+    text-transform: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    color: inherit;
+}
+
+@component page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-height: 100%;
+
+    @descendent head {
+        padding: 0 12.5rem 0;
+        box-shadow: 0 1px 2px #d5d7dc;
+    }
+
+    @descendent content {
+        flex-grow: 1;
+        padding: 3rem 12.5rem;
+        background-color: #f1eee5;
+    }
+}
+
+@component nav {
+    display: flex;
+
+    @descendent item {
+        @modifier menu {
+            flex: 1 0 0;
+        }
+    }
+
+    @modifier menu {
+        background-color: #fff;
+        border-bottom: .1rem solid #f1eee5;
+
+    }
+}
+
+@component nav-link {
+    position: relative;
+    color: #b5beb5;
+    letter-spacing: 1px;
+
+    &:after {
+        content: '';
+        background-repeat: no-repeat;
+        background-position: center;
+        position: absolute;
+        top: 3.3rem;
+        left: 3rem;
+        height: 2rem;
+        width: 2.4rem;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: .2rem;
+        width: 100%;
+        border-bottom: .2rem solid transparent;
+    }
+
+    @descendent link {
+        display: block;
+        width: 100%;
+        padding: 3.3rem 2.8rem 2.7rem 6.2rem;
+        font-size: 1.6rem;
+        text-transform: uppercase;
+    }
+
+    @descendent btn {
+        padding: 2rem 0 1.5rem;
+    }
+
+    @modifier menu {
+        &:after {
+            background-image: url('../img/icon-doc.png');
+        }
+    }
+
+    @modifier active_menu {
+        color: #2f3138;
+        background-color: rgba(241, 238, 229, .4);
+
+        &:before {
+            border-color: #ef643f;
+        }
+    }
+
+    @modifier orders {
+        &:hover:before {
+            border-color: #3885ca;
+        }
+        &:after {
+            background-image: url('../img/icon-basket.png');
+        }
+    }
+
+    @modifier active_orders {
+        color: #2f3138;
+        background-color: rgba(241, 238, 229, .4);
+
+        &:before {
+            border-color: #3885ca;
+        }
+    }
+
+    @modifier users {
+        &:hover:before {
+            border-color: #62b59b;
+        }
+        &:after {
+            background-image: url('../img/icon-profile.png');
+        }
+    }
+
+    @modifier active_users {
+        color: #2f3138;
+        background-color: rgba(241, 238, 229, .4);
+
+        &:before {
+            border-color: #62b59b;
+        }
+    }
+
+    @modifier day {
+
+        &:hover {
+            color: #2f3138;
+
+            &:before {
+                 border-color: #ef643f;
+                 bottom: -.1rem;
+             }
+        }
+    }
+
+    @modifier active {
+        color: #2f3138;
+
+        &:before {
+            border-color: #ef643f;
+            bottom: -.1rem;
+        }
+    }
+}
+
+@component main {
+    background-color: #fff;
+    box-shadow: 0 1px 2px #d5d7dc;
+    height: 100%;
+
+    @descendent content {
+        padding: 3rem 0 0;
+        height: 86vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+}
+
+@component btn {
+
+    @descendent text_mute {
+        color: #b5beb5;
+        font-size: 1.6rem;
+        font-weight: 400;
+        letter-spacing: 1px;
+    }
+
+    @modifier nav {
+        position: relative;
+        padding: 0.5rem;
+
+        &:before {
+            content: '';
+            position: absolute;
+            width: 1rem;
+            height: 1.8rem;
+            top: 0.5rem;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+
+    @modifier nav_next {
+        padding-right: 3rem;
+
+        &:before {
+            right: 0;
+            background-image: url('../img/icon-next.png');
+        }
+    }
+
+    @modifier nav_prev {
+        padding-left: 3rem;
+
+        &:before {
+            left: 0;
+            background-image: url('../img/icon-prev.png');
+        }
+    }
+
+    @modifier mute {
+        color: #b5beb5;
+        font-size: 1.6rem;
+        text-decoration: underline;
+    }
+
+    @modifier primary {
+        color: #fff;
+        font-size: 1.6rem;
+        background-color: #ef643f;
+        border-radius: 2rem;
+        padding: 1rem 2.5rem;
+    }
+}
+
+@component row {
+    display: flex;
+
+    @descendent cell {
+
+        @modifier flex-grow {
+            flex-grow: 1;
+        }
+
+        @modifier bg_line {
+            background: linear-gradient(to bottom, rgba(248,78,48,0) 0%, rgba(255,255,255,0) 0%, rgba(241,238,229,0) 49%, rgba(241,238,228,1) 50%, rgba(241,234,224,0) 51%, rgba(231,55,39,0) 100%);
+        }
+
+        @modifier width {
+            width: 6.5rem;
+            text-align: center;
+        }
+
+        @modifier dish {
+            padding-bottom: 1rem;
+        }
+    }
+
+    @modifier menu {
+        padding: 1rem 0;
+    }
+
+    @modifier column {
+        flex-direction: column;
+    }
+
+    @modifier ordered {
+
+    }
+}
+

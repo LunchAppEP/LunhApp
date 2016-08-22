@@ -2,72 +2,67 @@
 <html lang="en" ng-app="deliveryApp">
 <head>
     <meta charset="UTF-8">
-    <title>Menu</title>
+    <title>Lunch</title>
     <!---Styles---->
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link  rel="stylesheet" href="css/font-awesome.min.css">
-
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!----JS---->
     <script src="js/angular.min.js"></script>
     <script src="js/angular-resource.min.js"></script>
     <script src="js/angular-ui-router.min.js"></script>
+    <script src="js/moment.js"></script>
     <script src="js/filters/capitalize.js"></script>
     <script src="js/application.js"></script>
     <script src="js/appRoutes.js"></script>
-    <!--<script src="js/routes/dishDB.js"></script>-->
     <script src="js/controllers/menu/menu.js"></script>
+    <script src="js/controllers/menu/render-menu/render-menu.module.js"></script>
+    <script src="js/controllers/menu/nav/menu-nav.module.js"></script>
+    <script src="js/controllers/menu/new-menu/new-menu.module.js"></script>
+    <script src="js/controllers/menu/content/menu-content.module.js"></script>
+    <script src="js/controllers/user/user-list/user-list.module.js"></script>
     <script src="js/controllers/user/user.js"></script>
+    <script src="js/services/stateService.mediator.js"></script>
+    <script src="js/services/menuService.mediator.js"></script>
+    <script src="js/services/dishes.js"></script>
     <script src="js/services/userService.js"></script>
+    <script src="js/services/weekService.js"></script>
     <script src="js/services/menuService.js"></script>
 
 </head>
 <body>
     <div class="da-page">
-        <div class="da-page__header">
-            <header class="da-header">
-                <h1 class="da-header__title">
-                    <a class="da-nav__home" ui-sref="home"><img class="da-nav__img" src="img/logo.svg"></a>
-                </h1>
-            </header>
-        </div>
-        <div class="da-page__content">
-            <nav class="da-nav">
-                <div class="da-nav__navigation">
-                    <ul class="da-navigation">
-                        <li class="da-navigation__item">
-                            <a class="da-navigation-link" ui-sref="menu">
-                                <i class="fa fa-bars" aria-hidden="true"></i>
-                                <span class="da-navigation-link__title">Menu</span>
-                            </a>
+        <div class="da-page__head">
+            <nav class="da-navigation">
+                <div class="da-navigation__nav">
+                    <ul class="da-nav">
+                        <li class="da-nav__item">
+                            <div class="da-nav-link  da-nav-link_menu da-nav-link_active_menu">
+                                <a class="da-nav-link__link" ui-sref="menu">
+                                    <span class="da-nav-link__title">Menu</span>
+                                </a>
+                            </div>
                         </li>
-                        <li class="da-navigation__item">
-                            <a class="da-navigation-link" ui-sref="users">
-                                <i class="fa fa-users" aria-hidden="true"></i>
-                                <span class="da-navigation-link__title">Users</span>
-                            </a>
+                        <li class="da-nav__item">
+                            <div class="da-nav-link  da-nav-link_orders">
+                                <a class="da-nav-link__link" ui-sref="orders">
+                                    <span class="da-nav-link__title">Orders</span>
+                                </a>
+                            </div>
                         </li>
-                        <li class="da-navigation__item">
-                            <a class="da-navigation-link" ui-sref="orders">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <span class="da-navigation-link__title">Orders</span>
-                            </a>
-                        </li>
-                        <li class="da-navigation__item">
-                            <a class="da-navigation-link" ui-sref="order">
-                                <i class="fa fa-cutlery" aria-hidden="true"></i>
-                                <span class="da-navigation-link__title">Order</span>
-                            </a>
+                        <li class="da-nav__item">
+                            <div class="da-nav-link  da-nav-link_users">
+                                <a class="da-nav-link__link" ui-sref="users">
+                                    <span class="da-nav-link__title">Users</span>
+                                </a>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </nav>
+        </div>
+        <div class="da-page__content">
             <main class="da-main" ui-view>
             </main>
-        </div>
-        <div class="da-page__footer">
-            <footer class="da-footer">
-
-            </footer>
         </div>
     </div>
 </body>

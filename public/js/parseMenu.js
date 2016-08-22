@@ -2,6 +2,7 @@ module.exports = {
 
    createMenu: function(file) {
 
+       var moment = require('moment');
         //Регулярные выражения для парсинга меню
         var complexPattern = /комплексные обеды/ig;
         var daysPattern = /понедельник|вторник|среда|четверг|пятница/ig;
@@ -11,7 +12,7 @@ module.exports = {
         var dishInfoPattern = /[^0-9]+\s\d{2,3}\s/g;
         var weightPattern = /\d{2,3}/;
         var dinnerPattern = /[^0-9]+\d{2,3}\s\d{2}\s([^0-9]+\d{2,3}\s{2})+/g;
-        var now = new Date();
+        var now = moment();
        var menu = [];
        var days = [];
        
@@ -77,10 +78,11 @@ module.exports = {
 
         //Перебираем массив блюд и устанавливаем дату каждого дня на следующей неделе
         for (var i = 0; i < dishArr.length; i++) {
-            var dayDate = new Date();
-            dayDate.setDate(now.getDate() + (8 + i - now.getDay())); // устанавливаем день = (текущее число + (7 дней недели + 1 (потому что ищем дни следующей недели) + i (номер дня в следующей неделе) - номер сегоднешнего дня)
-            days.push(dayDate.getDate() + '/' + (dayDate.getMonth() + 1) + '/' + dayDate.getFullYear());
+            var dayDate = moment();
+            dayDate = dayDate.weekday(8 + i);
+            days.push(dayDate.format('DD/MM/YYYY'));
             //Убираем лишние пробелы в строках по типу блюд и дробим их на отдельные блюда
+            menu[i] = {date: dayDate.format('DD/MM/YYYY'), dishes: []}
             for (var j = 0; j < dishArr[i].length; j++) {
                 dishArr[i][j] = dishArr[i][j].trim();
                 dishArr[i][j] = dishArr[i][j].match(findDishes);
@@ -88,8 +90,9 @@ module.exports = {
                 //Убираем лишние пробелы в блюдах и сохраняем блюда в базу данных
                 for (var k = 0; k < dishArr[i][j].length; k++) {
                     dishArr[i][j][k] = dishArr[i][j][k].trim();
-                    var newDish = new Dish(dishArr[i][j][k].match(dishNamePattern), parseInt(dishArr[i][j][k].replace(dishInfoPattern, '')), parseInt(dishArr[i][j][k].match(weightPattern)), types[j], dayDate.getDate() + '/' + (dayDate.getMonth() + 1) + '/' + dayDate.getFullYear(), 'Dish');
-                    menu.push(newDish);
+                    var dishName = dishArr[i][j][k].match(dishNamePattern);
+                    var newDish = new Dish(dishName[0], parseInt(dishArr[i][j][k].replace(dishInfoPattern, '')), parseInt(dishArr[i][j][k].match(weightPattern)), types[j], dayDate.format('DD/MM/YYYY'), 'Dish');
+                    menu[i].dishes.push(newDish);
                 }
             }
         }
@@ -102,11 +105,11 @@ module.exports = {
 
         //Перебираем массив обедов на день и сохраняем каждый обед в базу данных
         for (var i = 0; i < dinnerArr.length; i++) {
-            var dayDate = new Date();
-            dayDate.setDate(now.getDate() + (8 + i - now.getDay()));
+            var dayDate = moment();
+            dayDate = dayDate.weekday(8 + i);
             //Разбиваем строку из обедов одного на массив обедов в этот день
             dinnerArr[i] = dinnerArr[i].match(dinnerPattern);
-
+            menu[i].dinners = [];
             //Перебираем обеды
             for (var j = 0; j < dinnerArr[i].length; j++) {
 
@@ -123,8 +126,8 @@ module.exports = {
 
                 }
                 //Создаем документ для базы данных и сохраняем его
-                var newDinner = new Dinner(parseInt(dinnerArr[i][j].replace(/[^0-9]*\s\d{2,3}\s/g, '')), dayDate.getDate() + '/' + (dayDate.getMonth() + 1) + '/' + dayDate.getFullYear(), 'Dinner', dishes);
-                menu.push(newDinner);
+                var newDinner = new Dinner(parseInt(dinnerArr[i][j].replace(/[^0-9]*\s\d{2,3}\s/g, '')), dayDate.format('DD/MM/YYYY'), 'Dinner', dishes);
+                menu[i].dinners.push(newDinner);
             }
         }
        return {menu: menu, types: types, daysDates: days};
@@ -134,11 +137,20 @@ module.exports = {
         var Dish = require(__base + 'models/dish');
         var Dinner = require(__base + 'models/dinner');
         menu.forEach(function(item) {
-            var dbModel =  item.modelType == 'Dish' ? item.toModel(Dish): item.toModel(Dinner);
-            dbModel.save(function(err) {
-                if (err) throw err;
+            item.dinners.forEach(function(item) {
+                var dbModel = item.toModel(Dinner);
+                dbModel.save(function(err) {
+                    if (err) throw err;
+                });
+            });
+            item.dishes.forEach(function(item) {
+                var dbModel = item.toModel(Dish);
+                dbModel.save(function(err) {
+                    if (err) throw err;
+                });
             });
         });
+
     },
 
     readFile: function() {

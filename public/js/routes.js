@@ -4,6 +4,7 @@ var dishes = require(__base + 'controllers/dish'),
     menu = require(__base + 'controllers/menu'),
     orders = require(__base + 'controllers/order'),
     users = require(__base + 'controllers/user'),
+    weeks = require(__base + 'controllers/week'),
     multer  = require('multer'),
     parseMenu = require(__base + 'public/js/parseMenu.js'),
     storage = multer.diskStorage({

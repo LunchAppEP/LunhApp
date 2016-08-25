@@ -14,6 +14,7 @@
 
     @descendent title {
         text-align: center;
+        letter-spacing: 2px;
     }
 }
 
@@ -105,7 +106,23 @@
 
 @component day-menu {
     height: 70vh;
-    overflow: auto;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+
+    & .scroll-viewport {
+        width: 100%;
+        height: calc(70vh - 12px);
+    }
+
+    & .scroll-overview {
+        width: 100%;
+    }
+
+    & .scroll-bar {
+        height: calc(70vh - 12px);
+        top: .6rem;
+    }
 
     @descendent category {
         padding: 0 3rem;
@@ -117,7 +134,7 @@
     @descendent title {
         color: #2f3138;
         font-size: 1.6rem;
-        padding: 6rem 0 2rem 0;
+        padding: 5.4rem 0 .8rem 0;
         font-weight: 500;
         text-transform: uppercase;
     }

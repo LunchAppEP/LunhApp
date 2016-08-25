@@ -1,12 +1,12 @@
 <div class="da-content__menu" ng-hide="vm.hideMenu">
     <ul class="da-nav da-nav_menu">
         <li class="da-nav__item da-nav__item_menu" ng-repeat="day in vm.days track by $index">
-            <div class="da-nav-link da-nav-link_day" ng-class="[{'da-nav-link_active': vm.state.currentDayIndex == $index}]">
-                <button type="button" class="da-nav-link__btn" ng-click="vm.changeCurrentDay($index)">{{day | uppercase}}</button>
+            <div>
+                <button type="button" class="da-nav-link da-nav-link_day" ng-class="[{'da-nav-link_active': vm.state.currentDayIndex == $index}]" ng-click="vm.changeCurrentDay($index)">{{day | uppercase}}</button>
             </div>
         </li>
     </ul>
-    <div class="da-day-menu">
+    <div class="da-day-menu" scrollbar="{autoUpdate: true}">
         <div class="da-day-menu__category">
             <div class="da-menu-category" ng-repeat="type in types">
                 <h3 class="da-menu-category__title">{{type}}</h3>

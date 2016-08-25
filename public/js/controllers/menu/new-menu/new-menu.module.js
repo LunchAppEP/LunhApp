@@ -55,5 +55,6 @@ angular.module('newMenuModule', [])
         });
 
         $scope.$watch('vm.menu', function(newVal) {});
+        $scope.$watch('$scope.savedMenu', function(newVal) {});
 
     }])

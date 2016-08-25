@@ -3,6 +3,7 @@ angular.module('deliveryApp', [
     'appRoutes',
     'ngResource',
     'Filters',
+    'ngTinyScrollbar',
     'newUserModule',
     'renderMenuModule',
     'navMenuModule',

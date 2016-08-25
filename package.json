@@ -26,6 +26,7 @@
     "mongoose": "^4.5.7",
     "multer": "^1.1.0",
     "nconf": "^0.8.4",
+    "ng-tiny-scrollbar": "^0.9.3",
     "npm": "^3.10.5",
     "postcss-bem": "^0.4.1",
     "postcss-import": "^8.1.2",

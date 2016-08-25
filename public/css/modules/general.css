@@ -9,14 +9,14 @@
 
 html {
     font-size: 10px;
-    letter-spacing: 1px;
 }
 
 @font-face
 {
-    font-family: Lato-light; /* Имя шрифта */
+    font-family: Lato; /* Имя шрифта */
 
     src: url('../fonts/Lato-Light.ttf'); /* Путь к файлу со шрифтом */
+    font-weight: 300;
 }
 
 @font-face
@@ -24,6 +24,16 @@ html {
     font-family: Lato; /* Имя шрифта */
 
     src: url('../fonts/Lato-Medium.ttf'); /* Путь к файлу со шрифтом */
+
+    font-weight: 400;
+}
+
+@font-face
+{
+    font-family: Lato; /* Имя шрифта */
+
+    src: url('../fonts/Lato-Semibold.ttf'); /* Путь к файлу со шрифтом */
+    font-weight: 600;
 }
 
 
@@ -88,7 +98,6 @@ button {
 @component nav-link {
     position: relative;
     color: #b5beb5;
-    letter-spacing: 1px;
 
     &:after {
         content: '';
@@ -117,10 +126,6 @@ button {
         padding: 3.3rem 2.8rem 2.7rem 6.2rem;
         font-size: 1.6rem;
         text-transform: uppercase;
-    }
-
-    @descendent btn {
-        padding: 2rem 0 1.5rem;
     }
 
     @modifier menu {
@@ -175,9 +180,14 @@ button {
     }
 
     @modifier day {
+        padding: 2rem .2rem 1rem;
+        font-size: 1.6rem;
+        font-weight: 400;
+        letter-spacing: 3px;
 
         &:hover {
             color: #2f3138;
+            font-size: 1.8rem;
 
             &:before {
                  border-color: #ef643f;
@@ -188,6 +198,7 @@ button {
 
     @modifier active {
         color: #2f3138;
+        font-size: 1.8rem;
 
         &:before {
             border-color: #ef643f;
@@ -292,6 +303,7 @@ button {
 
     @modifier menu {
         padding: 1rem 0;
+        line-height: 1;
     }
 
     @modifier column {

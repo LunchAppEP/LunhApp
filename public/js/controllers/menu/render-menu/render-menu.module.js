@@ -22,6 +22,16 @@ angular.module('renderMenuModule', [])
             stateService.changeDayIndex(index);
         };
 
+        $scope.config = {
+            autoHideScrollbar: false,
+            theme: 'light',
+            advanced:{
+                updateOnContentResize: true
+            },
+            setHeight: 200,
+            scrollInertia: 0
+        }
+
         $scope.$watch('$scope.menu', function(newVal) {
             newVal.forEach(function (item) {
                 if (item.dishes.length != 0 || item.dinners.length != 0) {

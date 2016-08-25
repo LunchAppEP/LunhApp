@@ -15,10 +15,14 @@ angular.module('contentMenuModule', [])
         vm.state= stateService;
         vm.addMenu = false;
         vm.getMenu = getMenuService;
-        
+        vm.savedMenu = true;
+
         $scope.$watch('vm.state.currentWeek', function(newVal) {
             vm.addMenu = newVal.type == 'next';
             vm.menu = vm.getMenu.allItems.thisWeekMenu(newVal.period);
+            if (!vm.menu &&!vm.addMenu) {
+                vm.savedMenu = false;
+            }
         });
         $scope.$watch('vm.getMenu.allItems', function(newVal) {
             vm.menu = newVal.thisWeekMenu(vm.state.currentWeek.period);

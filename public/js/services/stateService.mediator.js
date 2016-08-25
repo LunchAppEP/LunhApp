@@ -30,8 +30,8 @@ angular.module('createStateService', [])
             state.currentWeek = state.weeks[state.currentWeekIndex];
             var today = moment();
             state.today = today.format('DD/MM/YYYY');
+            state.currentDayIndex = 0;
             state.currentWeek.period.forEach(function(item, index) {
-                state.currentDayIndex = 0;
                 if (state.today == item) {
                     state.currentDayIndex = index;
                 }
@@ -45,8 +45,8 @@ angular.module('createStateService', [])
         state.changeWeekIndex = function(type) {
             state.currentWeekIndex = (type == 'deduct') ?  state.currentWeekIndex-1: state.currentWeekIndex+1;
             state.currentWeek = state.weeks[state.currentWeekIndex];
+            state.currentDayIndex = 0;
             state.currentWeek.period.forEach(function(item, index) {
-                state.currentDayIndex = 0;
                 if (state.today == item) {
                     state.currentDayIndex = index;
                 }

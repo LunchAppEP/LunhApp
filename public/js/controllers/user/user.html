@@ -1,20 +1,22 @@
 <div class="da-main__content">
-    <div class="da-add-user">
-        <div class="da-add-user__btn">
-            <button type="button" class="da-btn da-btn_add" ng-click="vm.showPopup=!vm.showPopup">Add new user</button>
+    <div class="da-content-head">
+        <div class="da-content-head__search">
+            <div class="da-search-bar">
+                <input type="text" placeholder="Search User" class="da-search-bar__input">
+                <span class="da-search-bar__icon"></span>
+            </div>
+        </div>
+        <div class="da-content-head__btn">
+            <button type="button" class="da-btn da-btn_main da-btn_secondary" ng-click="vm.showPopup()">Add New User</button>
         </div>
     </div>
-    <div class="da-users">
+    <div class="da-users" scrollbar="{autoUpdate: true}">
         <h2 class="da-users__title">Users list</h2>
         <div class="da-users__list">
             <new-user users="vm.users"></new-user>
         </div>
     </div>
-</div>
-
-<div class="da-balance-popup" ng-show="vm.addBal">
-    <input type="number" class="da-balance-popup__num" name="newBalance" ng-model="vm.userBalance.balance">
-    <button type="submit" class="da-balance-popup__submit" ng-click="vm.addMoney();vm.addBal=!vm.addBal"><i class="fa fa-money" aria-hidden="true"></i></button>
+    <add-user-popup ng-if="vm.addUser"></add-user-popup>
 </div>
 
 <div class="da-add-user-popup" ng-show="vm.showPopup">

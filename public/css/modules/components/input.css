@@ -1,0 +1,35 @@
+@component input-field {
+    border: 1px solid #f1eee5;
+    position: relative;
+    display: flex;
+
+    @descendent input {
+        width: 100%;
+        padding: 1rem 1.5rem;
+
+        &::-webkit-input-placeholder {
+             color: #b5beb5;
+             font-family: Lato;
+             font-size: 1.6rem;
+        }
+    }
+
+    @descendent add {
+        font-family: Lato;
+        color: #b5beb5;
+        font-size: 1.6rem;
+        align-self: center;
+        display: block;
+        height: 100%;
+    }
+
+    @descendent icon {
+        position: absolute;
+        right: 1.5rem;
+        top: .7rem;
+        width: 2rem;
+        height: 2rem;
+        pointer-events: none;
+        background: transparent url('../img/icon-search.png') no-repeat center;
+    }
+}

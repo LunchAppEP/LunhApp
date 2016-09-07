@@ -1,0 +1,116 @@
+@component btn {
+
+    @descendent text_mute {
+        color: #b5beb5;
+        font-size: 1.6rem;
+        font-weight: 400;
+        letter-spacing: 1px;
+    }
+
+    @modifier nav {
+        position: relative;
+        padding: 0.5rem;
+
+    &:hover .da-btn__text_mute{
+         color: #2f3138;
+     }
+
+    &:before {
+         content: '';
+         position: absolute;
+         width: 1rem;
+         height: 1.8rem;
+         top: 0.5rem;
+         background-position: center;
+         background-repeat: no-repeat;
+     }
+    }
+
+    @modifier nav_next {
+        padding-right: 3rem;
+
+    &:before {
+         right: 0;
+         background-image: url('../img/icon-next.png');
+     }
+    }
+
+    @modifier nav_prev {
+        padding-left: 3rem;
+
+    &:before {
+         left: 0;
+         background-image: url('../img/icon-prev.png');
+     }
+    }
+
+    @modifier transparent {
+        color: #b5beb5;
+        font-size: 1.6rem;
+        text-decoration: underline;
+    }
+
+    @modifier main {
+        font-size: 1.6rem;
+        border-radius: 2rem;
+        padding: 1rem 2.5rem;
+    }
+
+    @modifier primary {
+        color: #fff;
+        background-color: #ef643f;
+    }
+
+    @modifier secondary {
+        color: #fff;
+        background-color: #5bb296;
+    }
+
+    @modifier tertiary {
+        color: #fff;
+        background-color: #3885ca;
+    }
+
+    @modifier file-upload {
+        pointer-events: none;
+    }
+
+    @modifier dropdown {
+        padding: .5rem;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: transparent;
+
+    &_menu {
+         background-image: url('../img/icon-arrow-open-menu.png');
+     }
+
+    &_users {
+         background-image: url('../img/icon-arrow-open-user.png');
+     }
+
+    &_orders {
+         background-image: url('../img/icon-arrow-open-orders.png');
+     }
+    }
+
+    @modifier close {
+        background: transparent url('../img/icon-close.png') no-repeat center;
+        padding: .8rem;
+        border: .2rem solid #fff;
+        border-radius: 50%;
+    }
+
+    @modifier mute {
+        color: #fff;
+        background-color: #b5beb5;
+    }
+
+    @modifier pair-item {
+        padding: 1rem 2.5rem;
+        border-radius: 1.6rem;
+        line-height: 1rem;
+        font-size: 1.6rem;
+        font-weight: 400;
+    }
+}

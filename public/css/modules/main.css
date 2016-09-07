@@ -1,3 +1,6 @@
 @import 'general.css';
+@import 'components\btn.css';
+@import 'components\input.css';
+@import "popup.css";
 @import "menu.css";
-@import 'user-list.css';
+@import 'user.css';

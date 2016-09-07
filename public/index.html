@@ -7,6 +7,7 @@
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="css/ng-tiny-scrollbar.min.css" rel="stylesheet" type="text/css">
+
     <!----JS---->
     <script src="js/angular.min.js"></script>
     <script src="js/angular-resource.min.js"></script>
@@ -20,8 +21,10 @@
     <script src="js/controllers/menu/render-menu/render-menu.module.js"></script>
     <script src="js/controllers/menu/nav/menu-nav.module.js"></script>
     <script src="js/controllers/menu/new-menu/new-menu.module.js"></script>
+    <script src="js/controllers/menu/warning/warningPopup.module.js"></script>
     <script src="js/controllers/menu/content/menu-content.module.js"></script>
     <script src="js/controllers/user/user-list/user-list.module.js"></script>
+    <script src="js/controllers/user/new-user/new-user.module.js"></script>
     <script src="js/controllers/user/user.js"></script>
     <script src="js/services/stateService.mediator.js"></script>
     <script src="js/services/menuService.mediator.js"></script>
@@ -34,33 +37,45 @@
 <body>
     <div class="da-page">
         <div class="da-page__head">
-            <nav class="da-navigation">
-                <div class="da-navigation__nav">
-                    <ul class="da-nav">
-                        <li class="da-nav__item">
-                            <div class="da-nav-link  da-nav-link_menu da-nav-link_active_menu">
-                                <a class="da-nav-link__link" ui-sref="menu">
-                                    <span class="da-nav-link__title">Menu</span>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="da-nav__item">
-                            <div class="da-nav-link  da-nav-link_orders">
-                                <a class="da-nav-link__link" ui-sref="orders">
-                                    <span class="da-nav-link__title">Orders</span>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="da-nav__item">
-                            <div class="da-nav-link  da-nav-link_users">
-                                <a class="da-nav-link__link" ui-sref="users">
-                                    <span class="da-nav-link__title">Users</span>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
+            <div class="da-page__nav">
+                <nav class="da-navigation">
+                    <div class="da-navigation__nav">
+                        <ul class="da-nav">
+                            <li class="da-nav__item">
+                                <div class="da-nav-link  da-nav-link_menu" ui-sref-active="da-nav-link_active_menu">
+                                    <a class="da-nav-link__link" ui-sref="menu">
+                                        <span class="da-nav-link__title">Menu</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="da-nav__item">
+                                <div class="da-nav-link  da-nav-link_orders" ui-sref-active="da-nav-link_active_orders">
+                                    <a class="da-nav-link__link" ui-sref="orders">
+                                        <span class="da-nav-link__title">Orders</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="da-nav__item">
+                                <div class="da-nav-link  da-nav-link_users" ui-sref-active="da-nav-link_active_users">
+                                    <a class="da-nav-link__link" ui-sref="users">
+                                        <span class="da-nav-link__title">Users</span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="da-page__user">
+                <div class="da-user-action">
+                    <div class="da-user-action__img">
+                        <img class="da-user-avatar" src="img/user-img.png">
+                    </div>
+                    <div class="da-user-action__btn">
+                        <button type="button" class="da-btn da-btn_dropdown" ng-class="{'da-btn_dropdown_menu': ('menu' | isState), 'da-btn_dropdown_users': ('users' | isState), 'da-btn_dropdown_orders': ('orders' | isState)}"></button>
+                    </div>
                 </div>
-            </nav>
+            </div>
         </div>
         <div class="da-page__content">
             <main class="da-main" ui-view>

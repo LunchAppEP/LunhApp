@@ -1,5 +1,5 @@
-<div class="da-content-nav">
-    <div class="da-content-nav__btns">
+<div class="da-content-head">
+    <div class="da-content-head__btns">
         <div class="da-nav-btns">
             <div ng-hide="vm.hidePrev" class="da-nav-btns__btn da-nav-btns__btn_prev">
                 <button type="button" class="da-btn da-btn_nav da-btn_nav_prev" ng-click="vm.changeIndex('deduct')">
@@ -13,9 +13,8 @@
             </div>
         </div>
     </div>
-    <div class="da-content-nav__title">
+    <div class="da-content-head__title">
         <h2 class="da-content-header">{{ vm.state.currentWeek.title }}</h2>
         <p class="da-text da-text_color_accent">({{ vm.state.currentWeek.period[0] }} - {{ vm.state.currentWeek.period[4] }})</p>
     </div>
 </div>
-

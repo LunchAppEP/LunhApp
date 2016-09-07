@@ -4,17 +4,18 @@
             <div class="da-action-btns__item">
                 <div class="da-file-upload">
                     <label for="menuFile" class="da-file-upload__label">
-                        <span ng-hide="vm.hasNewMenu" class="da-file-upload__text"> Please, add new menu for next week!</span>
+                        <span ng-hide="vm.hasNewMenu || vm.wrongFile" class="da-file-upload__text"> Please, add new menu for next week!</span>
+                        <span ng-show="vm.wrongFile" class="da-file-upload__text"> You choose the wrong file. Please, add another file!</span>
                         <input id="menuFile" type="file" file-model="menuFileUpload" ng-model="menuFileUpload" class="da-file-upload__input">
-                        <button ng-hide="vm.hasNewMenu" type="button" class="da-btn da-btn_primary">Add New Menu</button>
-                        <button ng-show="vm.hasNewMenu" type="button" class="da-btn da-btn_mute">Choose Another File</button>
+                        <button ng-hide="vm.hasNewMenu" type="button" class="da-btn da-btn_main da-btn_primary da-btn_file-upload">Add New Menu</button>
+                        <button ng-show="vm.hasNewMenu" type="button" class="da-btn da-btn_transparent da-btn_file-upload">Choose Another File</button>
                     </label>
                 </div>
             </div>
             <div class="da-action-btns__item">
                 <div ng-show="vm.hasNewMenu" class="da-action-btns__item">
                     <div class="da-save-file">
-                        <button type="button" class="da-btn da-btn_primary" ng-click="vm.saveMenu()">Save</button>
+                        <button type="button" class="da-btn da-btn_main da-btn_primary" ng-click="vm.saveMenu()">Save</button>
                     </div>
                 </div>
             </div>

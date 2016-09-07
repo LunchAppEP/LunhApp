@@ -1,0 +1,47 @@
+<div class="da-page">
+    <div class="da-page__head">
+        <div class="da-page__nav">
+            <nav class="da-navigation">
+                <div class="da-navigation__nav">
+                    <ul class="da-nav">
+                        <li class="da-nav__item">
+                            <div class="da-nav-link  da-nav-link_menu" ui-sref-active="da-nav-link_active_menu">
+                                <a class="da-nav-link__link" ui-sref="menu">
+                                    <span class="da-nav-link__title">Menu</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="da-nav__item">
+                            <div class="da-nav-link  da-nav-link_orders" ui-sref-active="da-nav-link_active_orders">
+                                <a class="da-nav-link__link" ui-sref="orders">
+                                    <span class="da-nav-link__title">Orders</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="da-nav__item">
+                            <div class="da-nav-link  da-nav-link_users" ui-sref-active="da-nav-link_active_users">
+                                <a class="da-nav-link__link" ui-sref="users">
+                                    <span class="da-nav-link__title">Users</span>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="da-page__user">
+            <div class="da-user-action">
+                <div class="da-user-action__img">
+                    <img class="da-user-avatar" src="img/user-img.png">
+                </div>
+                <div class="da-user-action__btn">
+                    <button type="button" class="da-btn da-btn_dropdown" ng-class="{'da-btn_dropdown_menu': ('menu' | isState), 'da-btn_dropdown_users': ('users' | isState), 'da-btn_dropdown_orders': ('orders' | isState)}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="da-page__content">
+        <main class="da-main" ui-view>
+        </main>
+    </div>
+</div>

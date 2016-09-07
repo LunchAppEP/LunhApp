@@ -1,0 +1,31 @@
+<div class="da-popup-overlay">
+    <div class="da-popup">
+        <div class="da-popup__header">
+            <div class="da-popup-header da-popup-header_menu">
+                <div class="da-popup-header__title">
+                    <p class="da-popup-title">Save menu</p>
+                </div>
+                <div class="da-popup-header__close-btn">
+                    <button type="button" class="da-btn da-btn_close" ng-click="vm.closePopup()"></button>
+                </div>
+            </div>
+        </div>
+        <div class="da-popup__body">
+            <div class="da-popup-body">
+                <div class="da-popup-body__message">
+                    <p class="da-popup-message">Do You want to save this menu?</p>
+                </div>
+                <div class="da-popup-body__btns">
+                    <div class="da-pair-btns">
+                        <div class="da-pair-btns__item">
+                            <button type="button" class="da-btn da-btn_pair-item da-btn_primary" ng-click="vm.menuActions('save')">Yes</button>
+                        </div>
+                        <div class="da-pair-btns__item">
+                            <button type="button" class="da-btn da-btn_pair-item da-btn_mute" ng-click="vm.menuActions('delete')">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

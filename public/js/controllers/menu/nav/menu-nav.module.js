@@ -20,14 +20,22 @@ angular.module('navMenuModule', [])
             };
         });
 
+        $scope.$on('menuStatusSend', function(event, data) {
+            vm.menuStatus = data;
+        });
+
         vm.changeIndex = function(type) {
-            stateService.changeWeekIndex(type);
-            vm.hidePrev = false;
-            vm.hideNext  = false;
-            if (stateService.currentWeek.type == 'last') {
-                vm.hidePrev = true;
-            } else if (stateService.currentWeek.type == 'next') {
-                vm.hideNext  = true;
+            if (vm.menuStatus == 'file') {
+                $scope.$emit('showWarning', true);
+            } else {
+                stateService.changeWeekIndex(type);
+                vm.hidePrev = false;
+                vm.hideNext  = false;
+                if (stateService.currentWeek.type == 'last') {
+                    vm.hidePrev = true;
+                } else if (stateService.currentWeek.type == 'next') {
+                    vm.hideNext  = true;
+                }
             }
         };
 

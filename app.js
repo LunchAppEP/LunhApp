@@ -5,13 +5,17 @@ var mongoose = require('mongoose');
 var config = require('./config/index.js');
 var parseMenu = require('./public/js/parseMenu.js');
 var bodyParser = require('body-parser');
-
+var moment = require('moment');
+var initData = require('./initialData.js');
+var mondayWorker = require('./mondayWorker.js');
 
 mongoose.connect(config.get('mongoose:uri'));
 
 global.__base = __dirname + '/';
-
-var nextWeek = require('./public/js/createNextWeek.js');
+initData.findUsers();
+initData.findWeeks();
+mondayWorker.checkDay();
+// var nextWeek = require('./public/js/createNextWeek.js');
 
 var app = express();
 
@@ -23,7 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.listen(app.get('port'), function () {
     console.log('Example app listening on port ' +  config.get('port') );
-    nextWeek.createNextWeek();
+    // nextWeek.createNextWeek();
 });
 
 
@@ -32,7 +36,7 @@ require(__base + 'public/js/routes.js')(app);
 
 
 //удаление устаревшиего меню
-// var now = new Date();
+// var now = moment();
 // var dataOldWeekFriday = new Date();
 // dataOldWeekFriday.setDate(now.getDate() - 16 ); //находим необхдимую неделю для удаления ( минус 2 недели незед)
 //

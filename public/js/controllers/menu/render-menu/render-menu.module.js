@@ -17,33 +17,28 @@ angular.module('renderMenuModule', [])
         var vm = this;
 
         vm.state= stateService;
+        vm.hideMenu = true;
 
         vm.changeCurrentDay = function(index) {
             stateService.changeDayIndex(index);
         };
 
-        $scope.config = {
-            autoHideScrollbar: false,
-            theme: 'light',
-            advanced:{
-                updateOnContentResize: true
-            },
-            setHeight: 200,
-            scrollInertia: 0
-        }
-
         $scope.$watch('$scope.menu', function(newVal) {
-            newVal.forEach(function (item) {
-                if (item.dishes.length != 0 || item.dinners.length != 0) {
-                    vm.hideMenu = false;
-                }
-            });
+            if (newVal) {
+                newVal.forEach(function (item) {
+                    if (item.dishes.length != 0 || item.dinners.length != 0) {
+                        vm.hideMenu = false;
+                    }
+                });
+            }
         });
 
         $scope.$watch('vm.state.currentWeek', function(newVal) {
-            vm.hideMenu = !$scope.menu.some(function(item) {
-                return ((item.dishes.length != 0) || (item.dinners.length != 0));
-            });
+            if ($scope.menu) {
+                vm.hideMenu = !$scope.menu.some(function(item) {
+                    return ((item.dishes.length != 0) || (item.dinners.length != 0));
+                });
+            }
         });
 
         vm.days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];

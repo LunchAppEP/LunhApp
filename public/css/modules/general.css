@@ -23,9 +23,18 @@ html {
 {
     font-family: Lato; /* Имя шрифта */
 
-    src: url('../fonts/Lato-Medium.ttf'); /* Путь к файлу со шрифтом */
+    src: url('../fonts/Lato-Regular.ttf'); /* Путь к файлу со шрифтом */
 
     font-weight: 400;
+}
+
+@font-face
+{
+    font-family: Lato; /* Имя шрифта */
+
+    src: url('../fonts/Lato-Medium.ttf'); /* Путь к файлу со шрифтом */
+
+    font-weight: 500;
 }
 
 @font-face
@@ -61,6 +70,11 @@ button {
     color: inherit;
 }
 
+input[type="text"] {
+    outline: none;
+    border: none;
+}
+
 @component page {
     display: flex;
     flex-direction: column;
@@ -68,14 +82,36 @@ button {
     max-height: 100%;
 
     @descendent head {
-        padding: 0 12.5rem 0;
+        padding: 0 3rem 0 12.5rem;
         box-shadow: 0 1px 2px #d5d7dc;
+        display: flex;
+    }
+
+    @descendent nav {
+        flex-grow: 1;
+    }
+
+    @descendent user {
+        cursor: pointer;
+        align-self: center;
     }
 
     @descendent content {
         flex-grow: 1;
         padding: 3rem 12.5rem;
         background-color: #f1eee5;
+    }
+}
+
+@component user-action {
+    display: flex;
+
+    @descendent img {
+        margin-right: 1rem;
+    }
+
+    @descendent btn {
+        align-self: center;
     }
 }
 
@@ -108,6 +144,7 @@ button {
         left: 3rem;
         height: 2rem;
         width: 2.4rem;
+        pointer-events: none;
     }
 
     &:before {
@@ -129,6 +166,11 @@ button {
     }
 
     @modifier menu {
+        &:hover:before {
+            border-color: #ef643f;
+            animation-name:border;
+            animation-duration: .5s;
+        }
         &:after {
             background-image: url('../img/icon-doc.png');
         }
@@ -146,6 +188,8 @@ button {
     @modifier orders {
         &:hover:before {
             border-color: #3885ca;
+            animation-name:border;
+            animation-duration: .5s;
         }
         &:after {
             background-image: url('../img/icon-basket.png');
@@ -164,6 +208,8 @@ button {
     @modifier users {
         &:hover:before {
             border-color: #62b59b;
+            animation-name:border;
+            animation-duration: .5s;
         }
         &:after {
             background-image: url('../img/icon-profile.png');
@@ -188,10 +234,14 @@ button {
         &:hover {
             color: #2f3138;
             font-size: 1.8rem;
+             animation-name:text;
+             animation-duration: .5s;
 
             &:before {
                  border-color: #ef643f;
                  bottom: -.1rem;
+                 animation-name:border;
+                 animation-duration: .5s;
              }
         }
     }
@@ -200,11 +250,25 @@ button {
         color: #2f3138;
         font-size: 1.8rem;
 
+        &:hover {
+             animation: none;
+         }
+
         &:before {
             border-color: #ef643f;
             bottom: -.1rem;
         }
     }
+}
+
+@keyframes border {
+    0%{width: 0%}
+    100%{width: 100%}
+}
+
+@keyframes text {
+    0%{font-size: 1.6rem;}
+    100%{font-size: 1.8rem;}
 }
 
 @component main {
@@ -217,64 +281,6 @@ button {
         height: 86vh;
         display: flex;
         flex-direction: column;
-        position: relative;
-    }
-}
-
-@component btn {
-
-    @descendent text_mute {
-        color: #b5beb5;
-        font-size: 1.6rem;
-        font-weight: 400;
-        letter-spacing: 1px;
-    }
-
-    @modifier nav {
-        position: relative;
-        padding: 0.5rem;
-
-        &:before {
-            content: '';
-            position: absolute;
-            width: 1rem;
-            height: 1.8rem;
-            top: 0.5rem;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-    }
-
-    @modifier nav_next {
-        padding-right: 3rem;
-
-        &:before {
-            right: 0;
-            background-image: url('../img/icon-next.png');
-        }
-    }
-
-    @modifier nav_prev {
-        padding-left: 3rem;
-
-        &:before {
-            left: 0;
-            background-image: url('../img/icon-prev.png');
-        }
-    }
-
-    @modifier mute {
-        color: #b5beb5;
-        font-size: 1.6rem;
-        text-decoration: underline;
-    }
-
-    @modifier primary {
-        color: #fff;
-        font-size: 1.6rem;
-        background-color: #ef643f;
-        border-radius: 2rem;
-        padding: 1rem 2.5rem;
     }
 }
 
@@ -292,8 +298,9 @@ button {
         }
 
         @modifier width {
-            width: 6.5rem;
-            text-align: center;
+            width: 7rem;
+            text-align: right;
+            padding-right: 1rem;
         }
 
         @modifier dish {
@@ -302,16 +309,11 @@ button {
     }
 
     @modifier menu {
-        padding: 1rem 0;
-        line-height: 1;
+        padding: .5rem 0 1rem;
     }
 
     @modifier column {
         flex-direction: column;
-    }
-
-    @modifier ordered {
-
     }
 }
 

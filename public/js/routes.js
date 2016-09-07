@@ -42,7 +42,8 @@ module.exports = function (app) {
 
     app.put('/uploads', function(req, res) {
         var menu = parseMenu.readFile();
-        parseMenu.saveMenu(menu.menu);
+        var result = parseMenu.saveMenu(menu.menu)
+        res.send('result: ' + result);
     });
 
 

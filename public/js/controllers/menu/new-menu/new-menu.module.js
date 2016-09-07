@@ -30,6 +30,7 @@ angular.module('newMenuModule', [])
     .controller('newMenuController', ['$scope', 'stateService', 'MenuService', function($scope, stateService, MenuService) {
         var vm = this;
         vm.hasNewMenu = false;
+        vm.wrongFile = false;
 
         vm.uploadFile = function (file) {
             vm.hasNewMenu = false;
@@ -37,24 +38,42 @@ angular.module('newMenuModule', [])
             MenuService.send(file).$promise.then(
                 function (data) {
                     vm.menu = {menu: data.menu, types: data.types, days: data.daysDates};
+                    vm.wrongFile = false;
                     vm.hasNewMenu = true;
+                    $scope.$emit('menuStatus', 'file');
                 },
                 function (data) {
+                    vm.wrongFile = true;
                 });
         };
 
         vm.saveMenu = function() {
-            MenuService.save();
+            MenuService.save().$promise.then(function(data){
+                $scope.$emit('menuStatus', 'saved');
+            }, function(data){});
+
         };
 
         $scope.$watch('menuFileUpload', function(newVal) {
             if (newVal) {
-                console.log(newVal);
                 vm.uploadFile(newVal);
+            }
+        });
+        
+        $scope.$on('menuAction', function(event, data) {
+            console.log(data);
+            if (data == 'save') {
+                MenuService.save().$promise.then(function(data){
+                    $scope.$emit('menuStatus', 'saved');
+                }, function(data){});
+            } else if (data == 'delete') {
+                vm.menu = false;
+                vm.hasNewMenu = false;
+                $scope.menuFileUpload = undefined;
+                $scope.$emit('menuStatus', 'noFile');
             }
         });
 
         $scope.$watch('vm.menu', function(newVal) {});
-        $scope.$watch('$scope.savedMenu', function(newVal) {});
-
+        $scope.$watch("$scope.savedMenu.status", function(newVal) {});
     }])

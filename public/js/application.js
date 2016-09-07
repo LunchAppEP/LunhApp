@@ -9,6 +9,8 @@ angular.module('deliveryApp', [
     'navMenuModule',
     'menuAddController',
     'contentMenuModule',
+    'warningPopupModule',
+    'addUserModule',
     'userActionController',
     'newMenuModule',
     'addMenuService',
